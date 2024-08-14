@@ -1,95 +1,147 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+import { useState, useEffect } from 'react';
+import styles from './page.module.css';
+import studentsData from './data/students.json'; // Import mock data
 
 export default function Home() {
+  const [chosenStudent, setChosenStudent] = useState(null); //When choosing the student to see the graph
+  const [bestTimes, setBestTimes] = useState({});
+
+  //function to get the best times for each stroke for each student using double for loop
+  const updateBestTimes = (student, currentBestTimes) => {
+    console.log(currentBestTimes, 'help');
+    //get the current obj should be empty
+    const updatedBestTimes = { ...currentBestTimes };
+
+    const weeks = ['Week 1', 'Week 4', 'Week 7', 'Week 9'];
+    for (let i = 0; i < weeks.length; i++) {
+      //get the current weekData, if no data empty obj
+      const week = weeks[i];
+      const weekData = student.times[week] || {};
+      //if the student obj is empty, assign all strokes to Infinity
+      if (!updatedBestTimes[student.id]) {
+        updatedBestTimes[student.id] = {
+          freestyle: Infinity,
+          backstroke: Infinity,
+          breaststroke: Infinity,
+          butterfly: Infinity,
+        };
+      }
+      //Go through each stroke to get the weekData stroke time for current week using a for loop
+      const strokes = ['freestyle', 'backstroke', 'breaststroke', 'butterfly'];
+      for (let x = 0; x < strokes.length; x++) {
+        const stroke = strokes[x];
+        //if for the current week, there is a time
+        if (weekData[stroke] !== undefined) {
+          //if the time is less than the current stroke time, update it to the faster time
+          if (
+            // updatedBestTimes[student.id][stroke] === undefined ||
+            weekData[stroke] < updatedBestTimes[student.id][stroke]
+          ) {
+            updatedBestTimes[student.id][stroke] = weekData[stroke];
+          }
+        }
+      }
+    }
+
+    return updatedBestTimes;
+  };
+
+  const initializeBestTimes = (students) => {
+    let studentBestTimes = {};
+
+    for (let i = 0; i < students.length; i++) {
+      const student = students[i];
+      //each student will go through the function updateBestTimes to get best time
+      studentBestTimes = updateBestTimes(student, studentBestTimes);
+    }
+
+    setBestTimes(studentBestTimes);
+  };
+  // when loading page, it will initalize the best time once
+  useEffect(() => {
+    initializeBestTimes(studentsData);
+  }, []);
+
+  console.log(bestTimes, 'times');
+
+  //Show Graph, not available yet
+  const showGraph = (student) => {
+    setChosenStudent(student);
+  };
+
+  const eachStudentData = (students) => {
+    const array = [];
+    for (let i = 0; i < students.length; i++) {
+      const student = students[i];
+      //format the data
+      const formatTimes = (week) => {
+        const times = [];
+        const weekData = student.times[week];
+        //check if the week exists, if it does push the strokes times
+        if (weekData) {
+          if (weekData.freestyle) {
+            times.push(`Freestyle: ${weekData.freestyle}s`);
+          } else {
+            times.push('Freestyle: N/A');
+          }
+          if (weekData.backstroke) {
+            times.push(`Backstroke: ${weekData.backstroke}s`);
+          } else {
+            times.push('Backstroke: N/A');
+          }
+          if (weekData.breaststroke) {
+            times.push(`Breaststroke: ${weekData.breaststroke}s`);
+          } else {
+            times.push('Breaststroke: N/A');
+          }
+          if (weekData.butterfly) {
+            times.push(`Butterfly: ${weekData.butterfly}s`);
+          } else {
+            times.push('Butterfly: N/A');
+          }
+          //if the week doesnt exist,
+        } else {
+          times.push('Not Available yet');
+        }
+        //join them together
+        return times.join(' / ');
+      };
+      array.push(
+        <tr key={student.id}>
+          <td>{student.name}</td>
+          <td>{formatTimes('Week 1')}</td>
+          <td>{formatTimes('Week 4')}</td>
+          <td>{formatTimes('Week 7')}</td>
+          <td>{formatTimes('Week 9')}</td>
+          <td>
+            <button
+              className={styles.button}
+              onClick={() => showGraph(student)}
+            >
+              Show Graph
+            </button>
+          </td>
+        </tr>
+      );
+    }
+    return array;
+  };
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      <h1 className={styles.title}>Swim Team Times</h1>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Week 1</th>
+            <th>Week 4</th>
+            <th>Week 7</th>
+            <th>Week 9</th>
+          </tr>
+        </thead>
+        <tbody>{eachStudentData(studentsData)}</tbody>
+      </table>
     </main>
   );
 }

@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "name": "Jayden Zhen",
+    "times": {
+      "Week 1": {
+        "freestyle": 27.17,
+        "backstroke": 30.66,
+
+        "breaststroke": 35.33,
+        "butterfly": 30.55
+      },
+      "Week 4": {
+        "freestyle": 26.55,
+        "backstroke": 29.55,
+
+        "breaststroke": 34.22,
+        "butterfly": 28.99
+      }
+    }
+  },
+  {
+    "id": 2,
+    "name": "Charlotte",
+    "times": {
+      "Week 1": {
+        "freestyle": 30.2,
+        "backstroke": 33.5,
+
+        "breaststroke": 36.2,
+        "butterfly": 32.3
+      },
+      "Week 4": {
+        "freestyle": 29.99,
+        "backstroke": 32.99,
+ 
+        "breaststroke": 35.99,
+        "butterfly": 31.5
+      }
+    }
+  },
+  {
+    "id": 3,
+    "name": "Oliver Smith",
+    "times": {
+      "Week 1": {
+        "freestyle": 28.45,
+        "backstroke": 31.22,
+    
+        "breaststroke": 34.0,
+        "butterfly": 29.75
+      },
+      "Week 4": {
+        "freestyle": 27.85,
+        "backstroke": 30.55,
+       
+        "breaststroke": 33.5,
+        "butterfly": 28.55
+      }
+    }
+  },
+  {
+    "id": 4,
+    "name": "Liam Johnson",
+    "times": {
+      "Week 1": {
+        "freestyle": 29.1,
+        "backstroke": 32.05,
+  
+        "breaststroke": 36.1,
+        "butterfly": 31.0
+      },
+      "Week 4": {
+        "freestyle": 28.5,
+        "backstroke": 31.3,
+       
+        "breaststroke": 35.0,
+        "butterfly": 30.8
+      }
+    }
+  },
+  {
+    "id": 5,
+    "name": "Sophia Lee",
+    "times": {
+      "Week 1": {
+        "freestyle": 31.5,
+        "backstroke": 34.2,
+    
+        "breaststroke": 37.25,
+        "butterfly": 33.1
+      },
+      "Week 4": {
+        "freestyle": 30.75,
+        "backstroke": 33.1,
+        
+        "breaststroke": 36.4,
+        "butterfly": 32.2
+      }
+    }
+  },
+  {
+    "id": 6,
+    "name": "Ethan Davis",
+    "times": {
+      "Week 1": {
+        "freestyle": 28.8,
+        "backstroke": 31.6,
+        
+        "breaststroke": 34.5,
+        "butterfly": 30.0
+      },
+      "Week 4": {
+        "freestyle": 28.1,
+        "backstroke": 30.8,
+ 
+        "breaststroke": 33.8,
+        "butterfly": 29.4
+      }
+    }
+  },
+  {
+    "id": 7,
+    "name": "Ava Brown",
+    "times": {
+      "Week 1": {
+        "freestyle": 32.0,
+        "backstroke": 35.25,
+
+        "breaststroke": 38.3,
+        "butterfly": 34.1
+      },
+      "Week 4": {
+        "freestyle": 31.2,
+        "backstroke": 34.5,
+ 
+        "breaststroke": 37.5,
+        "butterfly": 33.4
+      }
+    }
+  },
+  {
+    "id": 8,
+    "name": "Mia Wilson",
+    "times": {
+      "Week 1": {
+        "freestyle": 30.9,
+        "backstroke": 33.8,
+      
+        "breaststroke": 36.4,
+        "butterfly": 32.5
+      },
+      "Week 4": {
+        "freestyle": 30.2,
+        "backstroke": 33.0,
+       
+        "breaststroke": 35.8,
+        "butterfly": 31.8
+      }
+    }
+  },
+  {
+    "id": 9,
+    "name": "Jackson Taylor",
+    "times": {
+      "Week 1": {
+        "freestyle": 29.25,
+        "backstroke": 32.45,
+    
+        "breaststroke": 35.0,
+        "butterfly": 31.1
+      },
+      "Week 4": {
+        "freestyle": 28.7,
+        "backstroke": 31.75,
+
+        "breaststroke": 34.6,
+        "butterfly": 30.4
+      }
+    }
+  },
+  {
+    "id": 10,
+    "name": "Isabella Martinez",
+    "times": {
+      "Week 1": {
+        "freestyle": 31.75,
+        "backstroke": 34.5,
+       
+        "breaststroke": 37.1,
+        "butterfly": 33.9
+      },
+      "Week 4": {
+        "freestyle": 31.0,
+        "backstroke": 33.8,
+      
+        "breaststroke": 36.5,
+        "butterfly": 33.2
+      }
+    }
+  }
+]
