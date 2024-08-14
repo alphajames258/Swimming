@@ -35,7 +35,6 @@ export default function Home() {
         if (weekData[stroke] !== undefined) {
           //if the time is less than the current stroke time, update it to the faster time
           if (
-            // updatedBestTimes[student.id][stroke] === undefined ||
             weekData[stroke] < updatedBestTimes[student.id][stroke]
           ) {
             updatedBestTimes[student.id][stroke] = weekData[stroke];
