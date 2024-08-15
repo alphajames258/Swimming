@@ -2,10 +2,15 @@
 import { useState, useEffect } from 'react';
 import styles from './page.module.css';
 import studentsData from './data/students.json'; // Import mock data
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
+
   const [chosenStudent, setChosenStudent] = useState(null); //When choosing the student to see the graph
   const [bestTimes, setBestTimes] = useState({});
+  const [stroke, setStroke] = useState(null);
+  const [Popup, setPopup] = useState(false);
 
   //function to get the best times for each stroke for each student using double for loop
   const updateBestTimes = (student, currentBestTimes) => {
@@ -35,7 +40,6 @@ export default function Home() {
         if (weekData[stroke] !== undefined) {
           //if the time is less than the current stroke time, update it to the faster time
           if (
-            // updatedBestTimes[student.id][stroke] === undefined ||
             weekData[stroke] < updatedBestTimes[student.id][stroke]
           ) {
             updatedBestTimes[student.id][stroke] = weekData[stroke];
@@ -68,7 +72,17 @@ export default function Home() {
   //Show Graph, not available yet
   const showGraph = (student) => {
     setChosenStudent(student);
+    setPopup(true)
   };
+
+  const strokeSelection = (stroke) => {
+    setStroke(stroke)
+    setPopup(false)
+    router.push(`/graph?studentId=${chosenStudent.id}&stroke=${stroke}`);
+  
+
+
+  }
 
   const eachStudentData = (students) => {
     const array = [];
@@ -142,6 +156,17 @@ export default function Home() {
         </thead>
         <tbody>{eachStudentData(studentsData)}</tbody>
       </table>
+
+      {Popup && (
+        <div className={styles.popup}>
+          <h2>Select a Stroke for {chosenStudent.name}'s Progress</h2>
+          <button onClick={() =>  strokeSelection('freestyle')}>Freestyle</button>
+          <button onClick={() =>  strokeSelection('backstroke')}>Backstroke</button>
+          <button onClick={() =>  strokeSelection('breaststroke')}>Breaststroke</button>
+          <button onClick={() =>  strokeSelection('butterfly')}>Butterfly</button>
+        </div>
+      )}
+
     </main>
   );
 }
