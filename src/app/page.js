@@ -7,23 +7,20 @@ import { useRouter } from 'next/navigation';
 export default function Home() {
   const router = useRouter();
 
-  const [chosenStudent, setChosenStudent] = useState(null); //When choosing the student to see the graph
+  const [chosenStudent, setChosenStudent] = useState(null); // When choosing the student to see the graph
   const [bestTimes, setBestTimes] = useState({});
   const [stroke, setStroke] = useState(null);
   const [Popup, setPopup] = useState(false);
 
-  //function to get the best times for each stroke for each student using double for loop
+  // Function to update best times for each stroke for a student
   const updateBestTimes = (student, currentBestTimes) => {
-    console.log(currentBestTimes, 'help');
-    //get the current obj should be empty
     const updatedBestTimes = { ...currentBestTimes };
-
     const weeks = ['Week 1', 'Week 4', 'Week 7', 'Week 9'];
+
     for (let i = 0; i < weeks.length; i++) {
-      //get the current weekData, if no data empty obj
       const week = weeks[i];
       const weekData = student.times[week] || {};
-      //if the student obj is empty, assign all strokes to Infinity
+
       if (!updatedBestTimes[student.id]) {
         updatedBestTimes[student.id] = {
           freestyle: Infinity,
@@ -32,16 +29,12 @@ export default function Home() {
           butterfly: Infinity,
         };
       }
-      //Go through each stroke to get the weekData stroke time for current week using a for loop
+
       const strokes = ['freestyle', 'backstroke', 'breaststroke', 'butterfly'];
       for (let x = 0; x < strokes.length; x++) {
         const stroke = strokes[x];
-        //if for the current week, there is a time
         if (weekData[stroke] !== undefined) {
-          //if the time is less than the current stroke time, update it to the faster time
-          if (
-            weekData[stroke] < updatedBestTimes[student.id][stroke]
-          ) {
+          if (weekData[stroke] < updatedBestTimes[student.id][stroke]) {
             updatedBestTimes[student.id][stroke] = weekData[stroke];
           }
         }
@@ -56,78 +49,98 @@ export default function Home() {
 
     for (let i = 0; i < students.length; i++) {
       const student = students[i];
-      //each student will go through the function updateBestTimes to get best time
       studentBestTimes = updateBestTimes(student, studentBestTimes);
     }
 
     setBestTimes(studentBestTimes);
   };
-  // when loading page, it will initalize the best time once
+
   useEffect(() => {
     initializeBestTimes(studentsData);
   }, []);
 
-  console.log(bestTimes, 'times');
+  console.log(bestTimes)
 
-  //Show Graph, not available yet
+  const handleTimeChange = (studentId, week, stroke, value) => {
+    const updatedBestTimes = { ...bestTimes };
+    const newValue = parseFloat(value);
+
+    if (!updatedBestTimes[studentId]) {
+      updatedBestTimes[studentId] = {};
+    }
+
+    if (!updatedBestTimes[studentId][week]) {
+      updatedBestTimes[studentId][week] = {};
+    }
+
+    updatedBestTimes[studentId][week][stroke] = newValue;
+
+    if (newValue < updatedBestTimes[studentId][stroke]) {
+      updatedBestTimes[studentId][stroke] = newValue;
+    }
+
+    setBestTimes(updatedBestTimes);
+  };
+
   const showGraph = (student) => {
     setChosenStudent(student);
-    setPopup(true)
+    setPopup(true);
   };
 
   const strokeSelection = (stroke) => {
-    setStroke(stroke)
-    setPopup(false)
+    setStroke(stroke);
+    setPopup(false);
     router.push(`/graph?studentId=${chosenStudent.id}&stroke=${stroke}`);
-  
+  };
 
+  const renderEditableTime = (studentId, week, stroke) => {
+    const timeValue = bestTimes[studentId]?.[week]?.[stroke] || '';
 
-  }
+    return (
+      <div className={styles.timeEntry}>
+        <label>{stroke.charAt(0).toUpperCase() + stroke.slice(1)}:</label>
+        <input
+          type="number"
+          value={timeValue}
+          onChange={(e) => handleTimeChange(studentId, week, stroke, e.target.value)}
+        /> s
+      </div>
+    );
+  };
 
   const eachStudentData = (students) => {
     const array = [];
+    
     for (let i = 0; i < students.length; i++) {
       const student = students[i];
-      //format the data
-      const formatTimes = (week) => {
-        const times = [];
-        const weekData = student.times[week];
-        //check if the week exists, if it does push the strokes times
-        if (weekData) {
-          if (weekData.freestyle) {
-            times.push(`Freestyle: ${weekData.freestyle}s`);
-          } else {
-            times.push('Freestyle: N/A');
-          }
-          if (weekData.backstroke) {
-            times.push(`Backstroke: ${weekData.backstroke}s`);
-          } else {
-            times.push('Backstroke: N/A');
-          }
-          if (weekData.breaststroke) {
-            times.push(`Breaststroke: ${weekData.breaststroke}s`);
-          } else {
-            times.push('Breaststroke: N/A');
-          }
-          if (weekData.butterfly) {
-            times.push(`Butterfly: ${weekData.butterfly}s`);
-          } else {
-            times.push('Butterfly: N/A');
-          }
-          //if the week doesnt exist,
-        } else {
-          times.push('Not Available yet');
-        }
-        //join them together
-        return times.join(' / ');
-      };
+
       array.push(
         <tr key={student.id}>
           <td>{student.name}</td>
-          <td>{formatTimes('Week 1')}</td>
-          <td>{formatTimes('Week 4')}</td>
-          <td>{formatTimes('Week 7')}</td>
-          <td>{formatTimes('Week 9')}</td>
+          <td>
+            {renderEditableTime(student.id, 'Week 1', 'freestyle')}
+            {renderEditableTime(student.id, 'Week 1', 'backstroke')}
+            {renderEditableTime(student.id, 'Week 1', 'breaststroke')}
+            {renderEditableTime(student.id, 'Week 1', 'butterfly')}
+          </td>
+          <td>
+            {renderEditableTime(student.id, 'Week 4', 'freestyle')}
+            {renderEditableTime(student.id, 'Week 4', 'backstroke')}
+            {renderEditableTime(student.id, 'Week 4', 'breaststroke')}
+            {renderEditableTime(student.id, 'Week 4', 'butterfly')}
+          </td>
+          <td>
+            {renderEditableTime(student.id, 'Week 7', 'freestyle')}
+            {renderEditableTime(student.id, 'Week 7', 'backstroke')}
+            {renderEditableTime(student.id, 'Week 7', 'breaststroke')}
+            {renderEditableTime(student.id, 'Week 7', 'butterfly')}
+          </td>
+          <td>
+            {renderEditableTime(student.id, 'Week 9', 'freestyle')}
+            {renderEditableTime(student.id, 'Week 9', 'backstroke')}
+            {renderEditableTime(student.id, 'Week 9', 'breaststroke')}
+            {renderEditableTime(student.id, 'Week 9', 'butterfly')}
+          </td>
           <td>
             <button
               className={styles.button}
@@ -141,6 +154,7 @@ export default function Home() {
     }
     return array;
   };
+
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>Swim Team Times</h1>
@@ -160,13 +174,12 @@ export default function Home() {
       {Popup && (
         <div className={styles.popup}>
           <h2>Select a Stroke for {chosenStudent.name}'s Progress</h2>
-          <button onClick={() =>  strokeSelection('freestyle')}>Freestyle</button>
-          <button onClick={() =>  strokeSelection('backstroke')}>Backstroke</button>
-          <button onClick={() =>  strokeSelection('breaststroke')}>Breaststroke</button>
-          <button onClick={() =>  strokeSelection('butterfly')}>Butterfly</button>
+          <button onClick={() => strokeSelection('freestyle')}>Freestyle</button>
+          <button onClick={() => strokeSelection('backstroke')}>Backstroke</button>
+          <button onClick={() => strokeSelection('breaststroke')}>Breaststroke</button>
+          <button onClick={() => strokeSelection('butterfly')}>Butterfly</button>
         </div>
       )}
-
     </main>
   );
 }
