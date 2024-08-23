@@ -1,0 +1,32 @@
+.fullScreen {
+   
+    height: 100vh;
+  }
+  
+  .backButton {
+
+
+  
+    padding: 10px 10px;
+    
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .backButton:hover {
+    background-color: #005bb5;
+  }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
