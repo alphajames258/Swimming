@@ -5,7 +5,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button"; // Import the Button component
+
 import "./table.css";
+
+
 
 const styles = {
   TableContainer: {
@@ -26,6 +30,7 @@ const styles = {
 };
 
 export default function TableComponent({ rows }) {
+  console.log(rows, 'rows')
   return (
     <TableContainer sx={styles.TableContainer} component={Paper}>
       <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
@@ -33,16 +38,19 @@ export default function TableComponent({ rows }) {
           <TableRow sx={styles.TableHead}>
             <TableCell sx={styles.TableHeadCell}>Student</TableCell>
             <TableCell sx={styles.TableHeadCell} align="right">
-              Freestyle
+              50y Freestyle
             </TableCell>
             <TableCell sx={styles.TableHeadCell} align="right">
-              Backstroke
+              50y Backstroke
             </TableCell>
             <TableCell sx={styles.TableHeadCell} align="right">
-              Breastroke
+              50y Breastroke
             </TableCell>
             <TableCell sx={styles.TableHeadCell} align="right">
-              Butterfly
+              50y Butterfly
+            </TableCell>
+            <TableCell sx={styles.TableHeadCell} align="right">
+             Check Graph
             </TableCell>
           </TableRow>
         </TableHead>
@@ -59,6 +67,11 @@ export default function TableComponent({ rows }) {
               <TableCell align="right">{row.backstroke}</TableCell>
               <TableCell align="right">{row.breastroke}</TableCell>
               <TableCell align="right">{row.butterfly}</TableCell>
+              <TableCell align="right">
+                <Button variant="contained" color="primary" onClick={() => alert(`Viewing graph for ${row.name}`)}>
+                  View Graph
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
