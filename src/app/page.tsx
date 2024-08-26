@@ -4,6 +4,7 @@ import styles from "./page.module.css";
 import { mockStudentData as studentsData } from "../data/students.ts"; // Import mock data
 import { WEEKS } from "../constants/swimmingConstants.ts";
 
+
 export default function Home() {
   const [chosenStudent, setChosenStudent] = useState(null); //When choosing the student to see the graph
   const [bestTimes, setBestTimes] = useState({});

@@ -12,6 +12,7 @@ import { count } from "console";
 export default function Table() {
   const [currentWeek, setCurrentWeek] = useState("weekOne");
   const tableData = createTableData(mockStudentData, currentWeek);
+  console.log(tableData, 'data')
 
   return (
     <>
