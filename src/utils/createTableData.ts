@@ -4,16 +4,14 @@ export function createTableData(data, week: string) {
   for (let i = 0; i < data.length; i++) {
     let student = data[i];
 
-    if (!student.times[week]) {
-      return [];
-    }
-    let name = student.name;
-    const freestyle = student.times[`${week}`].freestyle;
-    const backstroke = student.times[`${week}`].backstroke;
-    const breastroke = student.times[`${week}`].freestyle;
-    const butterfly = student.times[`${week}`].freestyle;
+    let name = student.name ?? 'N/A';
+    let age = student.age ?? 'N/A';
+    const freestyle = student.times?.[`${week}`]?.freestyle ?? 'N/A';
+    const backstroke = student.times?.[`${week}`]?.backstroke ?? 'N/A';
+    const breaststroke = student.times?.[`${week}`]?.breaststroke ?? 'N/A';
+    const butterfly = student.times?.[`${week}`]?.butterfly ?? 'N/A';
 
-    rows.push({ name, freestyle, backstroke, breastroke, butterfly });
+    rows.push({ name, age, freestyle, backstroke, breaststroke, butterfly });
   }
   return rows;
 }

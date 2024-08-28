@@ -1,64 +1,134 @@
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import "./table.css";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import './table.css';
+import { LINK_WATER, PERSIAN_BLUE, SPINDLE } from '../../constants/colors';
+import Button from '@mui/material/Button';
+import styled from 'styled-components';
+import { Alert, Box } from '@mui/material';
+import { WEEKS, mapWeekToString } from '../../constants/swimmingConstants';
 
 const styles = {
   TableContainer: {
-    width: "80%",
-    margin: "auto",
-    marginTop: "20px",
-    background: "#e0fbfc",
+    width: '90%',
+    margin: 'auto',
+    marginTop: '20px',
+    background: SPINDLE,
+    borderRadius: '15px',
+    border: '2px solid black',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Added box shadow
+    padding: '10px',
   },
   TableHead: {
-    background: "#ee6c4d",
-    fontWeight: "bold",
-    borderBottom: "3px solid black",
+    fontWeight: 'bold',
+    borderBottom: '3px solid black',
   },
   TableHeadCell: {
-    fontWeight: "bold",
-    fontSize: "16px",
+    fontWeight: 'bold',
+    fontSize: '16px',
+    color: PERSIAN_BLUE,
   },
 };
 
-export default function TableComponent({ rows }) {
+export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
+  const WeekButtons = (
+    <Box sx={{ textAlign: 'center' }}>
+      {WEEKS.map(week => (
+        <Button
+          sx={{
+            marginBottom: '0px',
+            marginRight: '5px',
+            fontWeight: 800,
+            border: week === currentWeek && '1px solid black',
+            padding: '5px 10px', // Adjust padding to make the buttons smaller
+            fontSize: '12px', // Adjust font size to make the buttons smaller
+          }}
+          variant='contained'
+          key={week}
+          onClick={() => {
+            setCurrentWeek(week);
+          }}
+        >
+          {mapWeekToString[week]}
+        </Button>
+      ))}
+    </Box>
+  );
+
   return (
     <TableContainer sx={styles.TableContainer} component={Paper}>
-      <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
+      <Box
+        sx={{
+          marginBottom: '10px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <span style={{ color: 'black', fontSize: '18px', fontWeight: '600' }}>
+          Summer 2024 Semester
+        </span>
+        {WeekButtons}
+      </Box>
+      <Table size='small' sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableHead>
           <TableRow sx={styles.TableHead}>
+            <TableCell sx={{ ...styles.TableHeadCell, width: '50px' }}>
+              Age
+            </TableCell>
             <TableCell sx={styles.TableHeadCell}>Student</TableCell>
-            <TableCell sx={styles.TableHeadCell} align="right">
+            <TableCell sx={styles.TableHeadCell} align='right'>
               Freestyle
             </TableCell>
-            <TableCell sx={styles.TableHeadCell} align="right">
+            <TableCell sx={styles.TableHeadCell} align='right'>
               Backstroke
             </TableCell>
-            <TableCell sx={styles.TableHeadCell} align="right">
-              Breastroke
+            <TableCell sx={styles.TableHeadCell} align='right'>
+              Breaststroke
             </TableCell>
-            <TableCell sx={styles.TableHeadCell} align="right">
+            <TableCell sx={styles.TableHeadCell} align='right'>
               Butterfly
             </TableCell>
           </TableRow>
         </TableHead>
+        {rows.length === 0 && (
+          <Alert
+            sx={{
+              position: 'absolute',
+              top: '200px',
+              left: '50%',
+              transform: 'translateX(-50%)', // Centers the component horizontally
+              width: '100%',
+              maxWidth: '500px',
+              backgroundColor: '#84A4FC',
+            }}
+            color='warning'
+            severity='error'
+          >
+            No Data Please select a different week or semester
+          </Alert>
+        )}
         <TableBody>
-          {rows.map((row) => (
+          {rows.map(row => (
             <TableRow
               key={row.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <TableCell align='left' component='th' scope='row'>
+                {row.age}
+              </TableCell>
+              <TableCell align='left' component='th' scope='row'>
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.freestyle}</TableCell>
-              <TableCell align="right">{row.backstroke}</TableCell>
-              <TableCell align="right">{row.breastroke}</TableCell>
-              <TableCell align="right">{row.butterfly}</TableCell>
+
+              <TableCell align='right'>{row.freestyle}</TableCell>
+              <TableCell align='right'>{row.backstroke}</TableCell>
+              <TableCell align='right'>{row.breaststroke}</TableCell>
+              <TableCell align='right'>{row.butterfly}</TableCell>
             </TableRow>
           ))}
         </TableBody>
