@@ -70,6 +70,19 @@ export default function Home() {
     setChosenStudent(student);
   };
 
+    // //Function to show graph
+    // const showGraph = (student) => {
+    //   console.log(student);
+    //   setChosenStudent(student);
+    //   setPopup(true);
+    // };
+    // //function to choose stroke, route to the graph page
+    // const strokeSelection = (stroke) => {
+    //   setStroke(stroke);
+    //   setPopup(false);
+    //   router.push(`/graph?studentId=${chosenStudent.id}&stroke=${stroke}`);
+    // };
+
   const eachStudentData = (students) => {
     const array = [];
     for (let i = 0; i < students.length; i++) {

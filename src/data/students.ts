@@ -6,7 +6,7 @@ export const mockStudentData = [
     times: {
       weekOne: {
         freestyle: 27.17,
-        backstroke: 30.66,
+        backstroke: 30.60,
         breaststroke: 35.33,
         butterfly: 30.55,
       },
@@ -16,6 +16,12 @@ export const mockStudentData = [
         breaststroke: 34.22,
         butterfly: 28.99,
       },
+      weekSeven : {
+        freestyle : 25.90,
+        backstroke: 30.55,
+        breaststroke: 40.40,
+        butterfly : 49.49,
+      }
     },
   },
   {

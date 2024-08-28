@@ -49,9 +49,7 @@ export default function TableComponent({ rows }) {
             <TableCell sx={styles.TableHeadCell} align="right">
               50y Butterfly
             </TableCell>
-            <TableCell sx={styles.TableHeadCell} align="right">
-             Check Graph
-            </TableCell>
+           
           </TableRow>
         </TableHead>
         <TableBody>
@@ -67,11 +65,7 @@ export default function TableComponent({ rows }) {
               <TableCell align="right">{row.backstroke}</TableCell>
               <TableCell align="right">{row.breastroke}</TableCell>
               <TableCell align="right">{row.butterfly}</TableCell>
-              <TableCell align="right">
-                <Button variant="contained" color="primary" onClick={() => alert(`Viewing graph for ${row.name}`)}>
-                  View Graph
-                </Button>
-              </TableCell>
+          
             </TableRow>
           ))}
         </TableBody>

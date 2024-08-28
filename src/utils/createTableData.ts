@@ -1,19 +1,28 @@
 export function createTableData(data, week: string) {
   const rows = [];
 
+ 
+  const hasWeekData = data.some(student => student.times[week]);
+
+  console.log(hasWeekData)
+
+  if (!hasWeekData) {
+   
+    return [];
+  }
+
   for (let i = 0; i < data.length; i++) {
     let student = data[i];
-
-    if (!student.times[week]) {
-      return [];
-    }
     let name = student.name;
-    const freestyle = student.times[`${week}`].freestyle;
-    const backstroke = student.times[`${week}`].backstroke;
-    const breastroke = student.times[`${week}`].freestyle;
-    const butterfly = student.times[`${week}`].freestyle;
+
+   
+    const freestyle = student.times[week]?.freestyle || "N/A";
+    const backstroke = student.times[week]?.backstroke || "N/A";
+    const breastroke = student.times[week]?.breaststroke || "N/A";
+    const butterfly = student.times[week]?.butterfly || "N/A";
 
     rows.push({ name, freestyle, backstroke, breastroke, butterfly });
   }
+
   return rows;
 }
