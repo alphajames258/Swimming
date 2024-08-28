@@ -14,7 +14,8 @@
   margin-top: 2rem;
 }
 
-.table th, .table td {
+.table th,
+.table td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
@@ -24,5 +25,3 @@
   background-color: #f4f4f4;
   color: #333;
 }
-
-

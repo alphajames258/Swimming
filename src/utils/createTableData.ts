@@ -1,5 +1,5 @@
 export function createTableData(data, week: string) {
-  const rows = [];
+  const rows: any = [];
 
  
   const hasWeekData = data.some(student => student.times[week]);
