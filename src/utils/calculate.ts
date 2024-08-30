@@ -28,8 +28,7 @@ export function analyzeSwimmerPerformance(
 
   const slightlyBetterSwimmer = parsedSwimmers[firstIndex];
   const betterSwimmer = parsedSwimmers[secondIndex];
-  const percentile =
-    ((formDataIndex / parsedSwimmers.length) * 100).toFixed(2) + '%';
+  const percentile = ((formDataIndex / parsedSwimmers.length) * 100).toFixed(2);
 
   return {
     percentile,
