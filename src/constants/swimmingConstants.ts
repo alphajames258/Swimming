@@ -27,5 +27,31 @@ const BREASTSTROKE_ICON = '/images/Breaststrokeicon.png'
 const BUTTERFLY_ICON = '/images/Butterflyicon.jpeg'
 
 
-export {FREESTYLE_ICON, BACKSTROKE_ICON, BREASTSTROKE_ICON, BUTTERFLY_ICON }
+const EVENTS = [
+  { name: '50 Yard Freestyle', imgSrc: FREESTYLE_ICON },
+  { name: '100 Yard Freestyle', imgSrc: FREESTYLE_ICON },
+  { name: '200 Yard Freestyle', imgSrc: FREESTYLE_ICON },
+  { name: '500 Yard Freestyle', imgSrc: FREESTYLE_ICON },
+  
+
+  { name: '50 Yard Backstroke', imgSrc: BACKSTROKE_ICON },
+  { name: '100 Yard Backstroke', imgSrc: BACKSTROKE_ICON },
+  { name: '200 Yard Backstroke', imgSrc: BACKSTROKE_ICON },
+  { name: '400 Yard Backstroke', imgSrc: BACKSTROKE_ICON },
+  
+
+  { name: '50 Yard Breaststroke', imgSrc: BREASTSTROKE_ICON },
+  { name: '100 Yard Breaststroke', imgSrc: BREASTSTROKE_ICON },
+  { name: '200 Yard Breaststroke', imgSrc: BREASTSTROKE_ICON },
+  { name: '400 Yard Breaststroke', imgSrc: BREASTSTROKE_ICON },
+  
+  
+  { name: '50 Yard Butterfly', imgSrc: BUTTERFLY_ICON },
+  { name: '100 Yard Butterfly', imgSrc: BUTTERFLY_ICON },
+  { name: '200 Yard Butterfly', imgSrc: BUTTERFLY_ICON },
+
+]
+
+
+export {EVENTS, FREESTYLE_ICON, BACKSTROKE_ICON, BREASTSTROKE_ICON, BUTTERFLY_ICON}
 

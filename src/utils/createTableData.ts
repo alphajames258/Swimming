@@ -4,7 +4,7 @@ export function createTableData(data, week: string) {
  
   const hasWeekData = data.some(student => student.times[week]);
 
-  console.log(hasWeekData)
+
 
   if (!hasWeekData) {
    

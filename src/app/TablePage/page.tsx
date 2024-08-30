@@ -12,7 +12,7 @@ import { count } from "console";
 export default function Table() {
   const [currentWeek, setCurrentWeek] = useState("weekOne");
   const tableData = createTableData(mockStudentData, currentWeek);
-  console.log(tableData, 'data')
+ 
 
   return (
     <>
@@ -49,7 +49,7 @@ export default function Table() {
               margin: "10px",
               marginBottom: "0px",
               fontWeight: 800,
-              border: week === currentWeek && "3px solid black",
+              border: week === currentWeek ? "3px solid black" : "none",
             }}
             variant="contained"
             key={week}
