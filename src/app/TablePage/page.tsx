@@ -48,14 +48,12 @@ export default function Table() {
               margin: '10px',
               marginBottom: '0px',
               fontWeight: 800,
+              border: week === currentWeek ? '3px solid black' : 'none',
             }}
             variant='contained'
             key={week}
             onClick={() => {
               setCurrentWeek(week);
-            }}
-            style={{
-              border: week === currentWeek ? '3px solid black' : undefined,
             }}
           >
             {mapWeekToString[week]}

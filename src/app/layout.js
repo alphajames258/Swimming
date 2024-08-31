@@ -1,13 +1,7 @@
 'use client';
-import { Archivo } from 'next/font/google';
 import './globals.css';
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import theme from '../utils/theme';
-
-const archivo = Archivo({
-  weight: ['400', '700'],
-  subsets: ['latin-ext'],
-});
 
 const metadata = {
   title: 'Create Next App',
