@@ -1,12 +1,12 @@
 export const mockStudentData = [
   {
     id: 1,
-    name: "Jayden Zhen",
-    age: 17, 
+    name: 'Jayden Zhen',
+    age: 17,
     times: {
       weekOne: {
         freestyle: 27.17,
-        backstroke: 30.60,
+        backstroke: 30.6,
         breaststroke: 35.33,
         butterfly: 30.55,
       },
@@ -16,24 +16,24 @@ export const mockStudentData = [
         breaststroke: 34.22,
         butterfly: 28.99,
       },
-      weekSeven : {
-        freestyle : 25.90,
+      weekSeven: {
+        freestyle: 25.9,
         backstroke: 30.55,
-        breaststroke: 40.40,
-        butterfly : 49.49,
-      }
+        breaststroke: 40.4,
+        butterfly: 49.49,
+      },
     },
   },
   {
     id: 2,
-    name: "Charlotte Li",
-    age: 15, 
+    name: 'Charlotte Li',
+    age: 15,
     times: {
       weekOne: {
         freestyle: 30.2,
-        backstroke: 33.20,
-        breaststroke: 41.00,
-        butterfly: 34.50,
+        backstroke: 33.2,
+        breaststroke: 41.0,
+        butterfly: 34.5,
       },
       weekFour: {
         freestyle: 29.77,
@@ -45,14 +45,14 @@ export const mockStudentData = [
   },
   {
     id: 3,
-    name: "Cody Wu",
-    age: 13, 
+    name: 'Cody Wu',
+    age: 13,
     times: {
       weekOne: {
         freestyle: 28.45,
-        backstroke: 36.70,
+        backstroke: 36.7,
         breaststroke: 41.57,
-        butterfly: 32.90,
+        butterfly: 32.9,
       },
       weekFour: {
         freestyle: 26.84,
@@ -64,8 +64,8 @@ export const mockStudentData = [
   },
   {
     id: 4,
-    name: "Rafael Liao",
-    age: 16, 
+    name: 'Rafael Liao',
+    age: 16,
     times: {
       weekOne: {
         freestyle: 29.1,
@@ -75,16 +75,16 @@ export const mockStudentData = [
       },
       weekFour: {
         freestyle: 27.13,
-        backstroke: 35.00,
-        breaststroke: 35.00,
-        butterfly: 31.00,
+        backstroke: 35.0,
+        breaststroke: 35.0,
+        butterfly: 31.0,
       },
     },
   },
   {
     id: 5,
-    name: "Anthony Xue",
-    age: 13, 
+    name: 'Anthony Xue',
+    age: 13,
     times: {
       weekOne: {
         freestyle: 33.5,
@@ -93,7 +93,7 @@ export const mockStudentData = [
         butterfly: 42.86,
       },
       weekFour: {
-        freestyle: 32.70,
+        freestyle: 32.7,
         backstroke: 42.21,
         breaststroke: 46.91,
         butterfly: 41.86,
@@ -102,18 +102,18 @@ export const mockStudentData = [
   },
   {
     id: 6,
-    name: "Evan Wang",
-    age: 12, 
+    name: 'Evan Wang',
+    age: 12,
     times: {
       weekOne: {
         freestyle: 35.77,
-        backstroke: 46.80,
-        breaststroke: 49.90,
+        backstroke: 46.8,
+        breaststroke: 49.9,
         butterfly: 40.0,
       },
       weekFour: {
-        freestyle: 34.50,
-        backstroke: 45.80,
+        freestyle: 34.5,
+        backstroke: 45.8,
         breaststroke: 47.71,
         butterfly: 37.96,
       },
@@ -121,33 +121,33 @@ export const mockStudentData = [
   },
   {
     id: 7,
-    name: "Eric Wang",
-    age: 12, 
+    name: 'Eric Wang',
+    age: 12,
     times: {
       weekOne: {
         freestyle: 37.13,
         backstroke: 41.73,
-        breaststroke: 50.00,
+        breaststroke: 50.0,
         butterfly: 40.53,
       },
       weekFour: {
-        freestyle: 35.70,
+        freestyle: 35.7,
         backstroke: 41.25,
         breaststroke: 48.12,
-        butterfly: 39.20,
+        butterfly: 39.2,
       },
     },
   },
   {
     id: 8,
-    name: "Jayden Ko",
-    age: 12, 
+    name: 'Jayden Ko',
+    age: 12,
     times: {
       weekOne: {
         freestyle: 35.9,
         backstroke: 45.8,
         breaststroke: 48.4,
-        butterfly: 41.50,
+        butterfly: 41.5,
       },
       weekFour: {
         freestyle: 34.72,
@@ -159,37 +159,37 @@ export const mockStudentData = [
   },
   {
     id: 9,
-    name: "Julian Ko",
-    age: 11, 
+    name: 'Julian Ko',
+    age: 11,
     times: {
       weekOne: {
-        freestyle: 38.90,
+        freestyle: 38.9,
         backstroke: 43.31,
         breaststroke: 57.69,
         butterfly: 49.51,
       },
       weekFour: {
         freestyle: 36.09,
-        backstroke: 42.20,
-        breaststroke: 54.20,
-        butterfly: 47.20,
+        backstroke: 42.2,
+        breaststroke: 54.2,
+        butterfly: 47.2,
       },
     },
   },
   {
     id: 10,
-    name: "Catherine Kwan",
-    age: 15, 
+    name: 'Catherine Kwan',
+    age: 15,
     times: {
       weekOne: {
         freestyle: 39.64,
         backstroke: 42.42,
         breaststroke: 43.59,
-        butterfly: 45.00,
+        butterfly: 45.0,
       },
       weekFour: {
         freestyle: 38.64,
-        backstroke: 43.50,
+        backstroke: 43.5,
         breaststroke: 44.78,
         butterfly: 44.53,
       },
@@ -197,25 +197,270 @@ export const mockStudentData = [
   },
   {
     id: 11,
-    name: "Christopher Kwan",
-    age: 13, 
+    name: 'Christopher Kwan',
+    age: 13,
     times: {
       weekOne: {
         freestyle: 39.64,
         backstroke: 42.42,
         breaststroke: 43.59,
-        butterfly: 45.00,
+        butterfly: 45.0,
       },
       weekFour: {
         freestyle: 38.64,
-        backstroke: 43.50,
+        backstroke: 43.5,
         breaststroke: 44.78,
         butterfly: 44.53,
+      },
+      weekSeven: {
+        freestyle: 31.3,
+        backstroke: 34.45,
+        breaststroke: 38.7,
+        butterfly: 33.3,
+      },
+    },
+  },
+  {
+    id: 3,
+    name: 'Cody Wu',
+    age: 13,
+    times: {
+      weekOne: {
+        freestyle: 28.45,
+        backstroke: 36.7,
+        breaststroke: 41.57,
+        butterfly: 32.99,
+      },
+      weekFour: {
+        freestyle: 26.84,
+        backstroke: 35.78,
+        breaststroke: 39.82,
+        butterfly: 30.91,
+      },
+      weekSeven: {
+        freestyle: 27.3,
+        backstroke: 36.48,
+        breaststroke: 39.9,
+        butterfly: 34.45,
+      },
+    },
+  },
+  {
+    id: 4,
+    name: 'Anthony Xue',
+    age: 13,
+    times: {
+      weekOne: {
+        freestyle: 33.5,
+        backstroke: 44.2,
+        breaststroke: 48.25,
+        butterfly: 42.86,
+      },
+      weekFour: {
+        freestyle: 32.7,
+        backstroke: 42.21,
+        breaststroke: 46.91,
+        butterfly: 41.86,
+      },
+    },
+  },
+  {
+    id: 5,
+    name: 'Evan Wang',
+    age: 11,
+    times: {
+      weekOne: {
+        freestyle: 35.77,
+        backstroke: 46.8,
+        breaststroke: 49.9,
+        butterfly: 40,
+      },
+      weekFour: {
+        freestyle: 34.5,
+        backstroke: 45.8,
+        breaststroke: 47.71,
+        butterfly: 37.96,
+      },
+      weekSeven: {
+        freestyle: 34.3,
+        backstroke: 39.9,
+        breaststroke: 45.5,
+        butterfly: 39.45,
+      },
+    },
+  },
+  {
+    id: 6,
+    name: 'Eric Wang',
+    age: 11,
+    times: {
+      weekOne: {
+        freestyle: 37.13,
+        backstroke: 41.73,
+        breaststroke: 50,
+        butterfly: 40.53,
+      },
+      weekFour: {
+        freestyle: 35.7,
+        backstroke: 41.25,
+        breaststroke: 48.12,
+        butterfly: 39.2,
+      },
+      weekSeven: {
+        freestyle: 35.25,
+        backstroke: 39.77,
+        breaststroke: 47.58,
+        butterfly: 37.6,
+      },
+    },
+  },
+  {
+    id: 7,
+    name: 'Shu Xin',
+    age: 16,
+    times: {
+      weekOne: {
+        freestyle: 37.75,
+        backstroke: 42.5,
+        breaststroke: 47.65,
+        butterfly: 41.4,
+      },
+      weekFour: {
+        freestyle: 37.4,
+        backstroke: 41.45,
+        breaststroke: 48.9,
+        butterfly: 42.35,
+      },
+      weekSeven: {
+        freestyle: 34.45,
+        backstroke: 40.22,
+        breaststroke: 45.5,
+        butterfly: 39.7,
+      },
+    },
+  },
+  {
+    id: 8,
+    name: 'Xiao Wu',
+    age: 16,
+    times: {
+      weekOne: {
+        freestyle: 29.95,
+        backstroke: 35.5,
+        breaststroke: 43.3,
+        butterfly: 33.45,
+      },
+      weekFour: {
+        freestyle: 27.6,
+        backstroke: 35.78,
+        breaststroke: 41.35,
+        butterfly: 32.77,
+      },
+      weekSeven: {
+        freestyle: 28.32,
+        backstroke: 34.7,
+        breaststroke: 42.2,
+        butterfly: 32.35,
+      },
+    },
+  },
+  {
+    id: 9,
+    name: 'Jayden Ko',
+    age: 12,
+    times: {
+      weekOne: {
+        freestyle: 35.9,
+        backstroke: 45.8,
+        breaststroke: 48.4,
+        butterfly: 41.5,
+      },
+      weekFour: {
+        freestyle: 34.72,
+        backstroke: 44.51,
+        breaststroke: 49.12,
+        butterfly: 41.45,
+      },
+    },
+  },
+  {
+    id: 10,
+    name: 'Julian Ko',
+    age: 11,
+    times: {
+      weekOne: {
+        freestyle: 38.9,
+        backstroke: 43.31,
+        breaststroke: 57.69,
+        butterfly: 49.51,
+      },
+      weekFour: {
+        freestyle: 36.09,
+        backstroke: 42.2,
+        breaststroke: 54.2,
+        butterfly: 47.2,
+      },
+    },
+  },
+  {
+    id: 11,
+    name: 'Catherine Kwan',
+    age: 15,
+    times: {
+      weekOne: {
+        freestyle: 39.64,
+        backstroke: 42.42,
+        breaststroke: 43.59,
+        butterfly: 45,
+      },
+      weekFour: {
+        freestyle: 38.64,
+        backstroke: 43.5,
+        breaststroke: 44.78,
+        butterfly: 44.53,
+      },
+    },
+  },
+  {
+    id: 12,
+    name: 'Christopher Kwan',
+    age: 13,
+    times: {
+      weekOne: {
+        freestyle: 36.2,
+        backstroke: 43.45,
+        breaststroke: 44.2,
+        butterfly: 40.79,
+      },
+      weekFour: {
+        freestyle: 34.91,
+        backstroke: 42.2,
+        breaststroke: 43.79,
+        butterfly: 45.25,
+      },
+    },
+  },
+  {
+    id: 13,
+    name: 'Ella Ngun',
+    age: 12,
+    times: {
+      weekOne: {
+        freestyle: 37.3,
+        backstroke: 35.2,
+        breaststroke: 47.35,
+        butterfly: 39.98,
+      },
+      weekFour: {
+        freestyle: 34.2,
+        backstroke: 37.35,
+        breaststroke: 48.4,
+        butterfly: 38.77,
       },
     },
   },
 ];
 
 export const swimmingApi = {
-  "2024Summer": mockStudentData,
+  '2024Summer': mockStudentData,
 };
