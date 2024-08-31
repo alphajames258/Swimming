@@ -1,18 +1,18 @@
 'use client';
-
+import React from 'react';
 import { useState } from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
-import Select from '@mui/material/Select';
-
-import Typography from '@mui/material/Typography';
-import Card from '@mui/material/Card';
-import Paper from '@mui/material/Paper';
-
-import Divider from '@mui/material/Divider';
+import {
+  Box,
+  TextField,
+  Button,
+  MenuItem,
+  InputLabel,
+  Select,
+  Typography,
+  Card,
+  Paper,
+  Divider,
+} from '@mui/material';
 
 import EventSelect from '../../components/Popup/Popup';
 import {
@@ -22,6 +22,16 @@ import {
   SPINDLE,
 } from '../../constants/swimmingConstants';
 
+const styles = {
+  Paper: { padding: 3, maxWidth: '500px', margin: 'auto', mt: '100px' },
+  SubmitButton: {
+    mt: 3,
+    fontWeight: 800,
+    color: PERSIAN_BLUE,
+    backgroundColor: SPINDLE,
+  },
+};
+
 export default function SwimmingForm() {
   const [age, setAge] = useState<string>('');
   const [event, setEvent] = useState<string>('50 Yard Freestyle');
@@ -29,22 +39,23 @@ export default function SwimmingForm() {
   const [seconds, setSeconds] = useState<string>('');
   const [milliseconds, setMilliseconds] = useState<string>('');
   const [gender, setGender] = useState<string>('men');
+  const [popup, setPopup] = useState<boolean>(false);
+
+  // Error Validation States
   const [ageError, setAgeError] = useState<boolean>(false);
   const [minutesError, setMinutesError] = useState<boolean>(false);
   const [secondsError, setSecondsError] = useState<boolean>(false);
   const [millisecondsError, setMillisecondsError] = useState<boolean>(false);
-  const [popup, setPopup] = useState<boolean>(false);
 
   const handleEventSelect = (selectedEvent: string) => {
     setEvent(selectedEvent);
     setPopup(false);
   };
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
     const time = `${minutes}:${seconds}.${milliseconds} seconds`;
     const formData = { age, event, time, gender };
-    console.log(formData, 'Data submitted');
   };
 
   const validateNumber = (value: string, max: number) => {
@@ -63,22 +74,7 @@ export default function SwimmingForm() {
 
   return (
     <>
-      <Box
-        sx={{
-          position: 'absolute',
-          top: '20px',
-          left: '50%',
-          transform: 'translate(-50%, 0)',
-          textAlign: 'center',
-          color: LINK_WATER,
-        }}
-      >
-        <Typography variant='h2'>Swimming Benchmark</Typography>
-      </Box>
-
-      <Paper
-        sx={{ padding: 3, maxWidth: '500px', margin: 'auto', mt: '100px' }}
-      >
+      <Paper sx={styles.Paper}>
         <Card sx={{ padding: 2 }}>
           <form onSubmit={handleSubmit} style={{ width: '100%' }}>
             <TextField
@@ -117,6 +113,7 @@ export default function SwimmingForm() {
 
             <Divider sx={{ my: 2 }} />
 
+            {/* Separate */}
             <Box sx={{ display: 'flex', gap: 1, mt: 2 }}>
               <TextField
                 label='Minutes'
@@ -164,6 +161,7 @@ export default function SwimmingForm() {
                 }
               />
             </Box>
+            {/* Separate */}
 
             <InputLabel id='gender-label' sx={{ color: MOODY_BLUE, mt: 1 }}>
               Gender
@@ -175,8 +173,8 @@ export default function SwimmingForm() {
               label='Gender'
               fullWidth
             >
-              <MenuItem value='men'>Man</MenuItem>
-              <MenuItem value='women'>Woman</MenuItem>
+              <MenuItem value='men'>Male</MenuItem>
+              <MenuItem value='women'>Female</MenuItem>
             </Select>
 
             <Button
@@ -184,12 +182,7 @@ export default function SwimmingForm() {
               variant='contained'
               color='primary'
               fullWidth
-              sx={{
-                mt: 3,
-                fontWeight: 800,
-                color: PERSIAN_BLUE,
-                backgroundColor: SPINDLE,
-              }}
+              sx={styles.SubmitButton}
             >
               Calculate
             </Button>

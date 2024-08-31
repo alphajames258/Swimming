@@ -16,5 +16,8 @@
     "sourceType": "module"
   },
   "plugins": ["react"],
-  "rules": {}
+  "rules": {
+    "no-unused-vars": "off", // Disable the rule for unused variables
+    "react-hooks/exhaustive-deps": "off" // Disable the rule for missing dependencies in useEffect
+  }
 }

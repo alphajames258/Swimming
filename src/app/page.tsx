@@ -67,20 +67,19 @@ export default function Home() {
     setChosenStudent(student);
   };
 
-    // //Function to show graph
-    // const showGraph = (student) => {
-    //   console.log(student);
-    //   setChosenStudent(student);
-    //   setPopup(true);
-    // };
-    // //function to choose stroke, route to the graph page
-    // const strokeSelection = (stroke) => {
-    //   setStroke(stroke);
-    //   setPopup(false);
-    //   router.push(`/graph?studentId=${chosenStudent.id}&stroke=${stroke}`);
-    // };
+  // //Function to show graph
+  // const showGraph = (student) => {
+  //   console.log(student);
+  //   setChosenStudent(student);
+  //   setPopup(true);
+  // };
+  // //function to choose stroke, route to the graph page
+  // const strokeSelection = (stroke) => {
+  //   setStroke(stroke);
+  //   setPopup(false);
+  //   router.push(`/graph?studentId=${chosenStudent.id}&stroke=${stroke}`);
+  // };
 
-  
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>Swim Team Times</h1>
@@ -94,7 +93,6 @@ export default function Home() {
             <th>Week 9</th>
           </tr>
         </thead>
-       
       </table>
     </main>
   );
