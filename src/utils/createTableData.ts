@@ -1,5 +1,10 @@
 export function createTableData(data, week: string) {
   const rows: any = [];
+  const hasWeekData = data.some(student => student.times[week]);
+
+  if (!hasWeekData) {
+    return [];
+  }
 
   for (let i = 0; i < data.length; i++) {
     let student = data[i];
@@ -13,5 +18,6 @@ export function createTableData(data, week: string) {
 
     rows.push({ name, age, freestyle, backstroke, breaststroke, butterfly });
   }
+
   return rows;
 }

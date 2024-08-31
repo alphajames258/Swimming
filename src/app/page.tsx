@@ -67,63 +67,19 @@ export default function Home() {
     setChosenStudent(student);
   };
 
-  const eachStudentData = students => {
-    const array = [];
-    for (let i = 0; i < students.length; i++) {
-      const student = students[i];
-      //format the data
-      const formatTimes = week => {
-        const times = [];
-        const weekData = student.times[week];
-        //check if the week exists, if it does push the strokes times
-        if (weekData) {
-          if (weekData.freestyle) {
-            times.push(`Freestyle: ${weekData.freestyle}s`);
-          } else {
-            times.push('Freestyle: N/A');
-          }
-          if (weekData.backstroke) {
-            times.push(`Backstroke: ${weekData.backstroke}s`);
-          } else {
-            times.push('Backstroke: N/A');
-          }
-          if (weekData.breaststroke) {
-            times.push(`Breaststroke: ${weekData.breaststroke}s`);
-          } else {
-            times.push('Breaststroke: N/A');
-          }
-          if (weekData.butterfly) {
-            times.push(`Butterfly: ${weekData.butterfly}s`);
-          } else {
-            times.push('Butterfly: N/A');
-          }
-          //if the week doesnt exist,
-        } else {
-          times.push('Not Available yet');
-        }
-        //join them together
-        return times.join(' / ');
-      };
-      array.push(
-        <tr key={student.id}>
-          <td>{student.name}</td>
-          <td>{formatTimes('weekOne')}</td>
-          <td>{formatTimes('weekFour')}</td>
-          <td>{formatTimes('Week 7')}</td>
-          <td>{formatTimes('Week 9')}</td>
-          <td>
-            <button
-              className={styles.button}
-              onClick={() => showGraph(student)}
-            >
-              Show Graph
-            </button>
-          </td>
-        </tr>
-      );
-    }
-    return array;
-  };
+  // //Function to show graph
+  // const showGraph = (student) => {
+  //   console.log(student);
+  //   setChosenStudent(student);
+  //   setPopup(true);
+  // };
+  // //function to choose stroke, route to the graph page
+  // const strokeSelection = (stroke) => {
+  //   setStroke(stroke);
+  //   setPopup(false);
+  //   router.push(`/graph?studentId=${chosenStudent.id}&stroke=${stroke}`);
+  // };
+
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>Swim Team Times</h1>
@@ -137,7 +93,6 @@ export default function Home() {
             <th>Week 9</th>
           </tr>
         </thead>
-        <tbody>{eachStudentData(studentsData)}</tbody>
       </table>
     </main>
   );

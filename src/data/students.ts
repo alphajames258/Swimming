@@ -6,7 +6,7 @@ export const mockStudentData = [
     times: {
       weekOne: {
         freestyle: 27.17,
-        backstroke: 30.66,
+        backstroke: 30.6,
         breaststroke: 35.33,
         butterfly: 30.55,
       },
@@ -18,28 +18,199 @@ export const mockStudentData = [
       },
       weekSeven: {
         freestyle: 25.9,
-        backstroke: 28.17,
-        breaststroke: 36.3,
-        butterfly: 33.55,
+        backstroke: 30.55,
+        breaststroke: 40.4,
+        butterfly: 49.49,
       },
     },
   },
   {
     id: 2,
     name: 'Charlotte Li',
-    age: 16,
+    age: 15,
     times: {
       weekOne: {
         freestyle: 30.2,
-        backstroke: 33.5,
-        breaststroke: 36.2,
-        butterfly: 32.3,
+        backstroke: 33.2,
+        breaststroke: 41.0,
+        butterfly: 34.5,
       },
       weekFour: {
-        freestyle: 29.99,
-        backstroke: 32.99,
-        breaststroke: 35.99,
-        butterfly: 31.5,
+        freestyle: 29.77,
+        backstroke: 34.25,
+        breaststroke: 40.91,
+        butterfly: 33.01,
+      },
+    },
+  },
+  {
+    id: 3,
+    name: 'Cody Wu',
+    age: 13,
+    times: {
+      weekOne: {
+        freestyle: 28.45,
+        backstroke: 36.7,
+        breaststroke: 41.57,
+        butterfly: 32.9,
+      },
+      weekFour: {
+        freestyle: 26.84,
+        backstroke: 35.78,
+        breaststroke: 39.83,
+        butterfly: 30.91,
+      },
+    },
+  },
+  {
+    id: 4,
+    name: 'Rafael Liao',
+    age: 16,
+    times: {
+      weekOne: {
+        freestyle: 29.1,
+        backstroke: 36.05,
+        breaststroke: 37.1,
+        butterfly: 32.0,
+      },
+      weekFour: {
+        freestyle: 27.13,
+        backstroke: 35.0,
+        breaststroke: 35.0,
+        butterfly: 31.0,
+      },
+    },
+  },
+  {
+    id: 5,
+    name: 'Anthony Xue',
+    age: 13,
+    times: {
+      weekOne: {
+        freestyle: 33.5,
+        backstroke: 44.2,
+        breaststroke: 48.25,
+        butterfly: 42.86,
+      },
+      weekFour: {
+        freestyle: 32.7,
+        backstroke: 42.21,
+        breaststroke: 46.91,
+        butterfly: 41.86,
+      },
+    },
+  },
+  {
+    id: 6,
+    name: 'Evan Wang',
+    age: 12,
+    times: {
+      weekOne: {
+        freestyle: 35.77,
+        backstroke: 46.8,
+        breaststroke: 49.9,
+        butterfly: 40.0,
+      },
+      weekFour: {
+        freestyle: 34.5,
+        backstroke: 45.8,
+        breaststroke: 47.71,
+        butterfly: 37.96,
+      },
+    },
+  },
+  {
+    id: 7,
+    name: 'Eric Wang',
+    age: 12,
+    times: {
+      weekOne: {
+        freestyle: 37.13,
+        backstroke: 41.73,
+        breaststroke: 50.0,
+        butterfly: 40.53,
+      },
+      weekFour: {
+        freestyle: 35.7,
+        backstroke: 41.25,
+        breaststroke: 48.12,
+        butterfly: 39.2,
+      },
+    },
+  },
+  {
+    id: 8,
+    name: 'Jayden Ko',
+    age: 12,
+    times: {
+      weekOne: {
+        freestyle: 35.9,
+        backstroke: 45.8,
+        breaststroke: 48.4,
+        butterfly: 41.5,
+      },
+      weekFour: {
+        freestyle: 34.72,
+        backstroke: 44.51,
+        breaststroke: 49.12,
+        butterfly: 41.45,
+      },
+    },
+  },
+  {
+    id: 9,
+    name: 'Julian Ko',
+    age: 11,
+    times: {
+      weekOne: {
+        freestyle: 38.9,
+        backstroke: 43.31,
+        breaststroke: 57.69,
+        butterfly: 49.51,
+      },
+      weekFour: {
+        freestyle: 36.09,
+        backstroke: 42.2,
+        breaststroke: 54.2,
+        butterfly: 47.2,
+      },
+    },
+  },
+  {
+    id: 10,
+    name: 'Catherine Kwan',
+    age: 15,
+    times: {
+      weekOne: {
+        freestyle: 39.64,
+        backstroke: 42.42,
+        breaststroke: 43.59,
+        butterfly: 45.0,
+      },
+      weekFour: {
+        freestyle: 38.64,
+        backstroke: 43.5,
+        breaststroke: 44.78,
+        butterfly: 44.53,
+      },
+    },
+  },
+  {
+    id: 11,
+    name: 'Christopher Kwan',
+    age: 13,
+    times: {
+      weekOne: {
+        freestyle: 39.64,
+        backstroke: 42.42,
+        breaststroke: 43.59,
+        butterfly: 45.0,
+      },
+      weekFour: {
+        freestyle: 38.64,
+        backstroke: 43.5,
+        breaststroke: 44.78,
+        butterfly: 44.53,
       },
       weekSeven: {
         freestyle: 31.3,

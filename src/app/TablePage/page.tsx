@@ -2,12 +2,8 @@
 import TableComponent from '../../components/Table/Table';
 import { createTableData } from '../../utils/createTableData';
 import { mockStudentData } from '../../data/students';
-import { useEffect, useRef, useState } from 'react';
-import { mapWeekToString, WEEKS } from '../../constants/swimmingConstants';
-import Alert from '@mui/material/Alert';
-import Button from '@mui/material/Button';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
-import { count } from 'console';
 
 export default function Table() {
   const [currentWeek, setCurrentWeek] = useState('weekOne');
@@ -31,8 +27,4 @@ export default function Table() {
       />
     </>
   );
-}
-
-{
-  /*  */
 }

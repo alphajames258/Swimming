@@ -13,6 +13,13 @@ import { Alert, Box } from '@mui/material';
 import { WEEKS, mapWeekToString } from '../../constants/swimmingConstants';
 
 const styles = {
+  WeekButton: {
+    marginBottom: '0px',
+    marginRight: '5px',
+    fontWeight: 800,
+    padding: '5px 10px', // Adjust padding to make the buttons smaller
+    fontSize: '12px', // Adjust font size to make the buttons smaller
+  },
   TableContainer: {
     width: '90%',
     margin: 'auto',
@@ -22,6 +29,7 @@ const styles = {
     border: '2px solid black',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Added box shadow
     padding: '10px',
+    marginBottom: '10px',
   },
   TableHead: {
     fontWeight: 'bold',
@@ -40,12 +48,8 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
       {WEEKS.map(week => (
         <Button
           sx={{
-            marginBottom: '0px',
-            marginRight: '5px',
-            fontWeight: 800,
-            border: week === currentWeek && '1px solid black',
-            padding: '5px 10px', // Adjust padding to make the buttons smaller
-            fontSize: '12px', // Adjust font size to make the buttons smaller
+            ...styles.WeekButton,
+            border: week === currentWeek ? '1px solid black' : 'none',
           }}
           variant='contained'
           key={week}
