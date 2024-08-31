@@ -3,7 +3,6 @@
 import { Box, Card, CardContent, Divider, Link, Rating } from '@mui/material';
 import { analyzeSwimmerPerformance } from '../../utils/calculate';
 import { useState } from 'react';
-import styled from 'styled-components';
 import Typography from '@mui/material/Typography';
 import {
   GOLD,

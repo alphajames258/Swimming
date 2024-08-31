@@ -5,10 +5,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import './table.css';
 import { LINK_WATER, PERSIAN_BLUE, SPINDLE } from '../../constants/colors';
 import Button from '@mui/material/Button';
-import styled from 'styled-components';
 import { Alert, Box } from '@mui/material';
 import { WEEKS, mapWeekToString } from '../../constants/swimmingConstants';
 

@@ -15,12 +15,7 @@ import {
 } from '@mui/material';
 
 import EventSelect from '../../components/Popup/Popup';
-import {
-  MOODY_BLUE,
-  LINK_WATER,
-  PERSIAN_BLUE,
-  SPINDLE,
-} from '../../constants/swimmingConstants';
+import { PERSIAN_BLUE, SPINDLE, MOODY_BLUE } from '../../constants/colors';
 
 const styles = {
   Paper: { padding: 3, maxWidth: '500px', margin: 'auto', mt: '100px' },
