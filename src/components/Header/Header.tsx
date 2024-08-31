@@ -2,7 +2,6 @@ import React from 'react';
 import { LINK_WATER, MOODY_BLUE, PERSIAN_BLUE } from '../../constants/colors';
 import { Button, Link } from '@mui/material';
 import Image from 'next/image';
-import PoolIcon from '@mui/icons-material/Pool';
 
 const headerStyle = {
   backgroundColor: 'white',
