@@ -20,7 +20,7 @@ export default function EventSelect({ open, onClose, onSelect }) {
   );
 
   return (
-    <Dialog open={open} fullWidth maxWidth='sm'>
+    <Dialog open={open} fullWidth maxWidth='sm' onClose={onClose}>
       <DialogTitle>Select Event</DialogTitle>
       <DialogContent>
         <TextField
