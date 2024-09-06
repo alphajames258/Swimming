@@ -1,4 +1,6 @@
 import Table from '@mui/material/Table';
+import { useState } from 'react';
+
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -19,12 +21,14 @@ const styles = {
     fontSize: '12px', // Adjust font size to make the buttons smaller
   },
   TableContainer: {
-    width: '90%',
+    width: 'auto',
+
     margin: 'auto',
-    marginTop: '20px',
+    // marginTop: '1px',
     background: SPINDLE,
-    borderRadius: '15px',
-    border: '2px solid black',
+    // borderRadius: '15px',
+
+    border: '2px black',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Added box shadow
     padding: '10px',
     marginBottom: '10px',
@@ -61,6 +65,8 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
     </Box>
   );
 
+
+
   return (
     <TableContainer sx={styles.TableContainer} component={Paper}>
       <Box
@@ -75,6 +81,7 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
           Summer 2024 Semester
         </span>
         {WeekButtons}
+      
       </Box>
       <Table size='small' sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableHead>
@@ -84,16 +91,16 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
             </TableCell>
             <TableCell sx={styles.TableHeadCell}>Student</TableCell>
             <TableCell sx={styles.TableHeadCell} align='right'>
-              Freestyle
+              50 yard Freestyle
             </TableCell>
             <TableCell sx={styles.TableHeadCell} align='right'>
-              Backstroke
+              50 yard Backstroke
             </TableCell>
             <TableCell sx={styles.TableHeadCell} align='right'>
-              Breaststroke
+              50 yard Breaststroke
             </TableCell>
             <TableCell sx={styles.TableHeadCell} align='right'>
-              Butterfly
+              50 yard Butterfly
             </TableCell>
           </TableRow>
         </TableHead>
