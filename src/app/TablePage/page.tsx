@@ -4,6 +4,7 @@ import { createTableData } from '../../utils/createTableData';
 import { mockStudentData } from '../../data/students';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
+import About from '../../components/About/About';
 
 export default function Table() {
   const [currentWeek, setCurrentWeek] = useState('weekOne');
@@ -25,6 +26,11 @@ export default function Table() {
         currentWeek={currentWeek}
         setCurrentWeek={setCurrentWeek}
       />
+
+      <About/>
+
+
+
     </>
   );
 }
