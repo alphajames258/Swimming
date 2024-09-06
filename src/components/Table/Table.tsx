@@ -1,5 +1,9 @@
 import Table from '@mui/material/Table';
+
 import { useState, useEffect } from 'react';
+
+
+
 
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -24,8 +28,11 @@ const styles = {
     width: 'auto',
 
     margin: 'auto',
+
     
     background: SPINDLE,
+
+
 
 
     border: '2px black',
@@ -97,6 +104,8 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
     </Box>
   );
 
+
+
   return (
     <TableContainer sx={styles.TableContainer} component={Paper}>
       <Box
@@ -111,6 +120,7 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
           Summer 2024 Semester
         </span>
         {WeekButtons}
+      
       </Box>
       <Table size='small' sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableHead>
@@ -121,6 +131,7 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
             >
               Age
             </TableCell>
+
             <TableCell sx={styles.TableHeadCell} onClick={() => Sort('name')}>
               Student
             </TableCell>
@@ -150,6 +161,7 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
               align='right'
               onClick={() => Sort('butterfly')}
             >
+
               50 yard Butterfly
             </TableCell>
           </TableRow>
