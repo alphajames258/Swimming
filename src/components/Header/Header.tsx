@@ -2,6 +2,7 @@ import React from 'react';
 import { LINK_WATER, MOODY_BLUE, PERSIAN_BLUE } from '../../constants/colors';
 import { Button, Link } from '@mui/material';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation'; 
 
 const headerStyle = {
   backgroundColor: 'white',
@@ -39,10 +40,20 @@ const Logo = () => {
 };
 
 function Header() {
+  const router = useRouter(); 
+
+  const handleButtonClick = () => {
+    router.push('/Form'); 
+  };
+
   return (
     <div style={headerStyle}>
       <Logo />
-      <Button variant='outlined' sx={buttonStyle}>
+      <Button
+        variant='outlined'
+        sx={buttonStyle}
+        onClick={handleButtonClick} // Attach click handler
+      >
         Test Your Speed
       </Button>
     </div>
