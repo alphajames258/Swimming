@@ -48,7 +48,8 @@ const styles = {
   },
 };
 
-export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
+export default function TableComponent({ rows, currentWeek, setCurrentWeek, selectedSemester }) {
+  
   const [sortRows, setSortRows] = useState(rows);
 
   useEffect(() => {
@@ -138,7 +139,7 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
         }}
       >
         <span style={{ color: 'black', fontSize: '18px', fontWeight: '600' }}>
-          Summer 2024 Semester
+          {selectedSemester} Semester
         </span>
         {WeekButtons}
       </Box>
@@ -211,7 +212,7 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
             const freestyleArrow = getArrow(row.freestyle, prevData.freestyle);
             const backstrokeArrow = getArrow(row.backstroke,prevData.backstroke);
             const breaststrokeArrow = getArrow(row.breaststroke, prevData.breaststroke);
-            const butterflyArrow = getArrow(row.butterfly, prevData.butterfly);
+            const  butterflyArrow = getArrow(row.butterfly, prevData.butterfly);
 
             return (
               <TableRow
