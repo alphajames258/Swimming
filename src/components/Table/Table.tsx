@@ -48,8 +48,12 @@ const styles = {
   },
 };
 
-export default function TableComponent({ rows, currentWeek, setCurrentWeek, selectedSemester }) {
-  
+export default function TableComponent({
+  rows,
+  currentWeek,
+  setCurrentWeek,
+  selectedSemester,
+}) {
   const [sortRows, setSortRows] = useState(rows);
 
   useEffect(() => {
@@ -67,11 +71,8 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek, sele
   const previousWeek: any = getPreviousWeek(currentWeek);
   const previousWeekData = createTableData(mockStudentData, previousWeek);
 
-
   const getArrow = (currentTime, previousTime) => {
     if (previousTime === 'N/A' || currentTime === 'N/A') return '';
-
-   
 
     if (isNaN(previousTime) || isNaN(currentTime)) return '';
 
@@ -138,7 +139,7 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek, sele
           alignItems: 'center',
         }}
       >
-        <span style={{ color: 'black', fontSize: '18px', fontWeight: '600' }}>
+        <span style={{ color: 'black', fontSize: '18px', fontWeight: '1000' }}>
           {selectedSemester} Semester
         </span>
         {WeekButtons}
@@ -207,12 +208,19 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek, sele
         <TableBody>
           {sortRows.map(row => {
             // Find the matching student from the previous week based on Name, ID DOESNT WORK
-            const prevData = previousWeekData.find(prevRow => prevRow.name === row.name) || {};
+            const prevData =
+              previousWeekData.find(prevRow => prevRow.name === row.name) || {};
 
             const freestyleArrow = getArrow(row.freestyle, prevData.freestyle);
-            const backstrokeArrow = getArrow(row.backstroke,prevData.backstroke);
-            const breaststrokeArrow = getArrow(row.breaststroke, prevData.breaststroke);
-            const  butterflyArrow = getArrow(row.butterfly, prevData.butterfly);
+            const backstrokeArrow = getArrow(
+              row.backstroke,
+              prevData.backstroke
+            );
+            const breaststrokeArrow = getArrow(
+              row.breaststroke,
+              prevData.breaststroke
+            );
+            const butterflyArrow = getArrow(row.butterfly, prevData.butterfly);
 
             return (
               <TableRow
@@ -252,8 +260,10 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek, sele
                   {row.breaststroke}{' '}
                   <span
                     style={
-                      breaststrokeArrow === '▲'  ? styles.arrowUp : styles.arrowDown
-                      }
+                      breaststrokeArrow === '▲'
+                        ? styles.arrowUp
+                        : styles.arrowDown
+                    }
                   >
                     {breaststrokeArrow}
                   </span>

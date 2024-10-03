@@ -1,7 +1,7 @@
-import { Aleo } from 'next/font/google';
+import { Aleo, Inter } from 'next/font/google';
 import { createTheme } from '@mui/material';
 
-const archivo = Aleo({
+const inter = Inter({
   weight: ['400', '700'],
   subsets: ['latin'],
 });
@@ -9,7 +9,7 @@ const archivo = Aleo({
 // Create a theme instance.
 const theme = createTheme({
   typography: {
-    fontFamily: archivo.style.fontFamily,
+    fontFamily: inter.style.fontFamily,
   },
 });
 
