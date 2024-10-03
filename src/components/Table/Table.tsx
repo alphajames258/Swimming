@@ -1,10 +1,5 @@
+import React, { useState, useEffect } from 'react';
 import Table from '@mui/material/Table';
-
-import { useState, useEffect } from 'react';
-
-
-
-
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -15,6 +10,8 @@ import { PERSIAN_BLUE, SPINDLE } from '../../constants/colors';
 import Button from '@mui/material/Button';
 import { Alert, Box } from '@mui/material';
 import { WEEKS, mapWeekToString } from '../../constants/swimmingConstants';
+import { createTableData } from '../../utils/createTableData';
+import { mockStudentData } from '../../data/students';
 
 const styles = {
   WeekButton: {
@@ -26,15 +23,8 @@ const styles = {
   },
   TableContainer: {
     width: 'auto',
-
     margin: 'auto',
-
-    
     background: SPINDLE,
-
-
-
-
     border: '2px black',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Added box shadow
     padding: '10px',
@@ -50,16 +40,51 @@ const styles = {
     color: PERSIAN_BLUE,
     cursor: 'pointer',
   },
+  arrowUp: {
+    color: 'green',
+  },
+  arrowDown: {
+    color: 'red',
+  },
 };
 
-export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
+export default function TableComponent({ rows, currentWeek, setCurrentWeek, selectedSemester }) {
+  
+  const [sortRows, setSortRows] = useState(rows);
+
   useEffect(() => {
     setSortRows(rows);
   }, [rows]);
 
-  const [sortRows, setSortRows] = useState(rows);
+  const getPreviousWeek = week => {
+    const weekIndex = WEEKS.indexOf(week);
 
-  const Sort = (stroke: string) => {
+    if (weekIndex <= 0) return null;
+    return WEEKS[weekIndex - 1];
+  };
+
+  //Ill specify it later
+  const previousWeek: any = getPreviousWeek(currentWeek);
+  const previousWeekData = createTableData(mockStudentData, previousWeek);
+
+
+  const getArrow = (currentTime, previousTime) => {
+    if (previousTime === 'N/A' || currentTime === 'N/A') return '';
+
+   
+
+    if (isNaN(previousTime) || isNaN(currentTime)) return '';
+
+    if (currentTime < previousTime) {
+      return '▲';
+    } else if (currentTime > previousTime) {
+      return '▼';
+    }
+
+    return '';
+  };
+
+  const Sort = stroke => {
     const newrows = [...rows];
 
     newrows.sort((a, b) => {
@@ -83,7 +108,6 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
     setSortRows(newrows);
   };
 
-
   const WeekButtons = (
     <Box sx={{ textAlign: 'center' }}>
       {WEEKS.map(week => (
@@ -104,8 +128,6 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
     </Box>
   );
 
-
-
   return (
     <TableContainer sx={styles.TableContainer} component={Paper}>
       <Box
@@ -117,10 +139,9 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
         }}
       >
         <span style={{ color: 'black', fontSize: '18px', fontWeight: '600' }}>
-          Summer 2024 Semester
+          {selectedSemester} Semester
         </span>
         {WeekButtons}
-      
       </Box>
       <Table size='small' sx={{ minWidth: 650 }} aria-label='simple table'>
         <TableHead>
@@ -161,7 +182,6 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
               align='right'
               onClick={() => Sort('butterfly')}
             >
-
               50 yard Butterfly
             </TableCell>
           </TableRow>
@@ -172,7 +192,7 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
               position: 'absolute',
               top: '200px',
               left: '50%',
-              transform: 'translateX(-50%)', // Centers the component horizontally
+              transform: 'translateX(-50%)',
               width: '100%',
               maxWidth: '500px',
               backgroundColor: '#84A4FC',
@@ -183,25 +203,74 @@ export default function TableComponent({ rows, currentWeek, setCurrentWeek }) {
             No Data Please select a different week or semester
           </Alert>
         )}
-        <TableBody>
-          {sortRows.map(row => (
-            <TableRow
-              key={row.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell align='left' component='th' scope='row'>
-                {row.age}
-              </TableCell>
-              <TableCell align='left' component='th' scope='row'>
-                {row.name}
-              </TableCell>
 
-              <TableCell align='right'>{row.freestyle}</TableCell>
-              <TableCell align='right'>{row.backstroke}</TableCell>
-              <TableCell align='right'>{row.breaststroke}</TableCell>
-              <TableCell align='right'>{row.butterfly}</TableCell>
-            </TableRow>
-          ))}
+        <TableBody>
+          {sortRows.map(row => {
+            // Find the matching student from the previous week based on Name, ID DOESNT WORK
+            const prevData = previousWeekData.find(prevRow => prevRow.name === row.name) || {};
+
+            const freestyleArrow = getArrow(row.freestyle, prevData.freestyle);
+            const backstrokeArrow = getArrow(row.backstroke,prevData.backstroke);
+            const breaststrokeArrow = getArrow(row.breaststroke, prevData.breaststroke);
+            const  butterflyArrow = getArrow(row.butterfly, prevData.butterfly);
+
+            return (
+              <TableRow
+                key={row.id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell align='left' component='th' scope='row'>
+                  {row.age}
+                </TableCell>
+                <TableCell align='left' component='th' scope='row'>
+                  {row.name}
+                </TableCell>
+
+                <TableCell align='right'>
+                  {row.freestyle}{' '}
+                  <span
+                    style={
+                      freestyleArrow === '▲' ? styles.arrowUp : styles.arrowDown
+                    }
+                  >
+                    {freestyleArrow}
+                  </span>
+                </TableCell>
+                <TableCell align='right'>
+                  {row.backstroke}{' '}
+                  <span
+                    style={
+                      backstrokeArrow === '▲'
+                        ? styles.arrowUp
+                        : styles.arrowDown
+                    }
+                  >
+                    {backstrokeArrow}
+                  </span>
+                </TableCell>
+                <TableCell align='right'>
+                  {row.breaststroke}{' '}
+                  <span
+                    style={
+                      breaststrokeArrow === '▲'  ? styles.arrowUp : styles.arrowDown
+                      }
+                  >
+                    {breaststrokeArrow}
+                  </span>
+                </TableCell>
+                <TableCell align='right'>
+                  {row.butterfly}{' '}
+                  <span
+                    style={
+                      butterflyArrow === '▲' ? styles.arrowUp : styles.arrowDown
+                    }
+                  >
+                    {butterflyArrow}
+                  </span>
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>
