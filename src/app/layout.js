@@ -3,6 +3,7 @@ import './globals.css';
 import Header from '../components/Header/Header';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../utils/theme';
+import About from '../components/About/About';
 
 const metadata = {
   title: 'Create Next App',
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
       <body>
         <Header />
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        <About />
       </body>
     </html>
   );

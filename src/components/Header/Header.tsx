@@ -2,7 +2,7 @@ import React from 'react';
 import { LINK_WATER, MOODY_BLUE, PERSIAN_BLUE } from '../../constants/colors';
 import { Button, Link } from '@mui/material';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from 'next/navigation';
 
 const headerStyle = {
   backgroundColor: 'white',
@@ -28,8 +28,13 @@ const buttonStyle = {
 };
 
 const Logo = () => {
+  const router = useRouter();
   return (
     <Image
+      onClick={() => {
+        router.push('/');
+      }}
+      style={{ cursor: 'pointer' }}
       alt='swim benchmark logo'
       src='/logos/swimBenchmarkv8.png'
       width={375}
@@ -40,10 +45,10 @@ const Logo = () => {
 };
 
 function Header() {
-  const router = useRouter(); 
+  const router = useRouter();
 
   const handleButtonClick = () => {
-    router.push('/Form'); 
+    router.push('/Form');
   };
 
   return (
