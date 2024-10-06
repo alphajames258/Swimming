@@ -9,7 +9,7 @@ import { getTodaysDate } from '../../utils/date.ts';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: 'AIzaSyDod3zjhJWOrJ-0Jk4G3LPx7VxZ5Vosbwg',
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: 'swimming-472cb.firebaseapp.com',
   projectId: 'swimming-472cb',
   storageBucket: 'swimming-472cb.appspot.com',
