@@ -19,6 +19,7 @@ export const mapWeekToString = {
   [WEEK_TEN]: 'Week Ten',
 };
 
+
 const EVENTS = [
   { name: '50 Yard Freestyle', imgSrc: FREESTYLE_ICON },
   // { name: '100 Yard Freestyle', imgSrc: FREESTYLE_ICON },
