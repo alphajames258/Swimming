@@ -12,6 +12,7 @@ import { Alert, Box } from '@mui/material';
 import { WEEKS, mapWeekToString } from '../../constants/swimmingConstants';
 import { createTableData } from '../../utils/createTableData';
 import { mockStudentData } from '../../data/students';
+import { useRouter } from 'next/navigation';
 
 const styles = {
   WeekButton: {
@@ -56,6 +57,12 @@ export default function TableComponent({
 }) {
   const [sortRows, setSortRows] = useState(rows);
 
+  const router = useRouter();
+
+  const handleButtonClick = (name: string | number) => {
+    router.push(`/Profile/${name}`);
+  };
+
   useEffect(() => {
     setSortRows(rows);
   }, [rows]);
@@ -99,7 +106,7 @@ export default function TableComponent({
         return 0;
       }
 
-      if (stroke === 'name') {
+      if (stroke === 'name' || stroke === 'IM') {
         return a[stroke].localeCompare(b[stroke]);
       }
 
@@ -185,6 +192,13 @@ export default function TableComponent({
             >
               50 yard Butterfly
             </TableCell>
+            <TableCell
+              sx={styles.TableHeadCell}
+              align='right'
+              onClick={() => Sort('IM')}
+            >
+              100 yard IM
+            </TableCell>
           </TableRow>
         </TableHead>
         {rows.length === 0 && (
@@ -221,6 +235,9 @@ export default function TableComponent({
               prevData.breaststroke
             );
             const butterflyArrow = getArrow(row.butterfly, prevData.butterfly);
+            const imArrow = getArrow(row.IM, prevData.IM);
+
+            const name = row.name.toLowerCase().replace(/\s+/g, '');
 
             return (
               <TableRow
@@ -230,7 +247,13 @@ export default function TableComponent({
                 <TableCell align='left' component='th' scope='row'>
                   {row.age}
                 </TableCell>
-                <TableCell align='left' component='th' scope='row'>
+                <TableCell
+                  align='left'
+                  component='th'
+                  scope='row'
+                  onClick={() => handleButtonClick(name)} 
+                  style={{ cursor: 'pointer' }}
+                >
                   {row.name}
                 </TableCell>
 
@@ -276,6 +299,14 @@ export default function TableComponent({
                     }
                   >
                     {butterflyArrow}
+                  </span>
+                </TableCell>
+                <TableCell align='right'>
+                  {row.IM}{' '}
+                  <span
+                    style={imArrow === '▲' ? styles.arrowUp : styles.arrowDown}
+                  >
+                    {imArrow}
                   </span>
                 </TableCell>
               </TableRow>

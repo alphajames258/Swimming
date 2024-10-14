@@ -15,8 +15,9 @@ export function createTableData(data, week: string) {
     const backstroke = student.times?.[`${week}`]?.backstroke ?? 'N/A';
     const breaststroke = student.times?.[`${week}`]?.breaststroke ?? 'N/A';
     const butterfly = student.times?.[`${week}`]?.butterfly ?? 'N/A';
+    const IM = student.times?.[`${week}`]?.IM ?? 'N/A'; 
 
-    rows.push({ name, age, freestyle, backstroke, breaststroke, butterfly });
+    rows.push({ name, age, freestyle, backstroke, breaststroke, butterfly, IM });
   }
 
   return rows;
