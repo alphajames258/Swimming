@@ -48,7 +48,7 @@ export default function Profile() {
 
   if (!profileData1 && !profileData2) return <p>Loading...</p>;
 
-  const activeProfile = profileData1 || profileData2;
+
 
   const renderTimes = times => {
     return (
@@ -254,6 +254,7 @@ export default function Profile() {
             maxWidth: 300,
             margin: '0 auto',
           }}
+         
         >
           <Typography variant='h6'>
             Freestyle: {personalBestTimes.freestyle}
@@ -269,7 +270,9 @@ export default function Profile() {
           </Typography>
           <Typography variant='h6'>IM: {personalBestTimes.IM}</Typography>
         </Card>
+
       </Box>
+  
     </div>
   );
 }
