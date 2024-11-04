@@ -223,7 +223,7 @@ export default function TableComponent({
           {sortRows.map(row => {
             // Find the matching student from the previous week based on Name, ID DOESNT WORK
             const prevData =
-              previousWeekData.find(prevRow => prevRow.name === row.name) || {};
+              previousWeekData.find(prevRow => prevRow.id === row.id) || {};
 
             const freestyleArrow = getArrow(row.freestyle, prevData.freestyle);
             const backstrokeArrow = getArrow(

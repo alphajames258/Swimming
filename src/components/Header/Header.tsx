@@ -32,7 +32,7 @@ const Logo = () => {
   return (
     <Image
       onClick={() => {
-        router.push('/');
+        router.push('/home');
       }}
       style={{ cursor: 'pointer' }}
       alt='swim benchmark logo'

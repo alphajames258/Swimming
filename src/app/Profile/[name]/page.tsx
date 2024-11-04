@@ -21,107 +21,91 @@ import { mockStudentData } from '../../../data/students';
 import { mockStudentData2 } from '../../../data/fallstudents';
 import { WEEKS } from '../../../constants/swimmingConstants';
 import { mapWeekToString } from '../../../constants/swimmingConstants';
-import { blue } from '@mui/material/colors';
-import { PROFILE_ICON, POOL_ICON } from '../../../constants/icons';
+import { PROFILE_ICON } from '../../../constants/icons';
 import { useRouter } from 'next/navigation';
+import { semesterData } from '../../../data/semesters';
+import { ProfileData } from '../../../data/semesters';
+import { SwimmingTimes } from '../../../data/semesters';
+import { PersonalBestTimes } from '../../../data/semesters';
 
 export default function Profile() {
   const router = useRouter();
-  const { name } = useParams<{ name: string }>();
+  const { name } = useParams<{ name: string }>()!;
+  const [profileData, setProfileData] = useState<ProfileData[]>([]);
 
-  const [profileData1, setProfileData1] = useState(null);
-  const [profileData2, setProfileData2] = useState(null);
+  const [attendedSemesters, setAttendedSemesters] = useState<string[]>([]);
+
 
   useEffect(() => {
-    const studentData1 = [...mockStudentData];
-    const student = studentData1.find(
+    const studentRecord = semesterData.find(
       s => s.name.toLowerCase().replace(/\s+/g, '') === name
     );
-    setProfileData1(student);
 
-    const studentData2 = [...mockStudentData2];
-    const student2 = studentData2.find(
-      s => s.name.toLowerCase().replace(/\s+/g, '') === name
-    );
-    setProfileData2(student2);
+    if (studentRecord) {
+      setAttendedSemesters(studentRecord.attendedSemesters);
+      
+      const profile : ProfileData[] = studentRecord.attendedSemesters.map(semester => {
+        const data =
+          semester === '2024Summer'
+            ? mockStudentData.find(s => s.name === studentRecord.name)
+            : mockStudentData2.find(s => s.name === studentRecord.name);
+        return { semester, ...data } as ProfileData ;
+      });
+
+      setProfileData(profile);
+    }
   }, [name]);
 
-  if (!profileData1 && !profileData2) return <p>Loading...</p>;
+  console.log(profileData, 'data')
 
+  if (profileData.length === 0) return <p>Loading...</p>;
 
+  const renderTimes = times => (
+    <>
+      {WEEKS.map(week => {
+        const weekData = times[week];
+        return (
+          <TableRow key={week}>
+            <TableCell>{mapWeekToString[week]}</TableCell>
+            <TableCell align='right'>{weekData?.freestyle || 'N/A'}</TableCell>
+            <TableCell align='right'>{weekData?.backstroke || 'N/A'}</TableCell>
+            <TableCell align='right'>{weekData?.breaststroke || 'N/A'}</TableCell>
+            <TableCell align='right'>{weekData?.butterfly || 'N/A'}</TableCell>
+            <TableCell align='right'>{weekData?.IM || 'N/A'}</TableCell>
+          </TableRow>
+        );
+      })}
+    </>
+  );
 
-  const renderTimes = times => {
-    return (
-      <>
-        {WEEKS.map(week => {
-          const weekData = times[week];
-
-          return (
-            <TableRow key={week}>
-              <TableCell>{mapWeekToString[week]}</TableCell>
-              <TableCell align='right'>
-                {weekData ? weekData.freestyle : 'N/A'}
-              </TableCell>
-              <TableCell align='right'>
-                {weekData ? weekData.backstroke : 'N/A'}
-              </TableCell>
-              <TableCell align='right'>
-                {weekData ? weekData.breaststroke : 'N/A'}
-              </TableCell>
-              <TableCell align='right'>
-                {weekData ? weekData.butterfly : 'N/A'}
-              </TableCell>
-              <TableCell align='right'>
-                {weekData ? weekData.IM : 'N/A'}
-              </TableCell>
-            </TableRow>
-          );
-        })}
-      </>
-    );
-  };
-
-  const getPersonalBestTimes = (data1, data2) => {
-    const strokes = [
-      'freestyle',
-      'backstroke',
-      'breaststroke',
-      'butterfly',
-      'IM',
-    ];
-
-    const bestTimes = {};
-    strokes.forEach(stroke => {
-      let bestTime = Infinity;
-
-      if (data1) {
-        WEEKS.forEach(week => {
-          const time = data1.times[week]?.[stroke];
-          if (time && time < bestTime) {
-            bestTime = time;
+  const getPersonalBestTimes = (data: ProfileData[]): PersonalBestTimes => {
+    const strokes = ['freestyle', 'backstroke', 'breaststroke', 'butterfly', 'IM'];
+    const bestTimes: PersonalBestTimes = {
+      freestyle: Infinity,
+      backstroke: Infinity,
+      breaststroke: Infinity,
+      butterfly: Infinity,
+      IM: Infinity,
+    };
+  
+    strokes.forEach((stroke) => {
+      data.forEach((profile) => {
+        WEEKS.forEach((week) => {
+          const time = profile.times[week]?.[stroke];
+          if (time && time < bestTimes[stroke]) {
+            bestTimes[stroke] = time;
           }
         });
-      }
+      });
 
-      if (data2) {
-        WEEKS.forEach(week => {
-          const time = data2.times[week]?.[stroke];
-          if (time && time < bestTime) {
-            bestTime = time;
-          }
-        });
-      }
-      if (bestTime === Infinity) {
-        bestTimes[stroke] = 'IM needs to be converted';
-      } else {
-        bestTimes[stroke] = bestTime;
-      }
+      bestTimes[stroke] = bestTimes[stroke] === Infinity ? 'N/A' : bestTimes[stroke];
     });
-
+  
     return bestTimes;
   };
+  
 
-  const personalBestTimes = getPersonalBestTimes(profileData1, profileData2);
+  const personalBestTimes = getPersonalBestTimes(profileData);
 
   return (
     <div style={{ padding: '30px' }}>
@@ -139,6 +123,7 @@ export default function Profile() {
       >
         Back to Main Page
       </button>
+
       <Card
         sx={{
           padding: 3,
@@ -152,12 +137,12 @@ export default function Profile() {
         <Avatar
           sx={{ width: 100, height: 100, margin: '0 auto' }}
           src={PROFILE_ICON}
-        ></Avatar>
+        />
         <Typography variant='h4' sx={{ marginTop: 2 }}>
-          {profileData1?.name || profileData2?.name}
+          {profileData[0]?.name}
         </Typography>
         <Typography variant='subtitle1' color='textSecondary'>
-          {profileData1?.age || profileData2?.age}{' '}
+          {profileData[0]?.age}
         </Typography>
       </Card>
 
@@ -171,69 +156,35 @@ export default function Profile() {
       </Typography>
 
       <Grid container spacing={5}>
-        <Grid item xs={2} md={6}>
-          <Card sx={{ padding: 2 }}>
-            <Typography
-              variant='h6'
-              sx={{ textAlign: 'center', color: 'blue' }}
-            >
-              Summer 2024
-            </Typography>
-            <TableContainer component={Paper}>
-              <Table size='small' aria-label='swimming times'>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Week</TableCell>
-                    <TableCell align='right'>Freestyle</TableCell>
-                    <TableCell align='right'>Backstroke</TableCell>
-                    <TableCell align='right'>Breaststroke</TableCell>
-                    <TableCell align='right'>Butterfly</TableCell>
-                    <TableCell align='right'>IM</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {profileData1 && renderTimes(profileData1.times)}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Card>
-        </Grid>
-
-        <Grid item xs={12} md={6}>
-          <Card sx={{ padding: 2 }}>
-            <Typography
-              variant='h6'
-              sx={{ textAlign: 'center', color: 'blue' }}
-            >
-              Fall 2024
-            </Typography>
-            <TableContainer component={Paper}>
-              <Table size='small' aria-label='swimming times'>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Week</TableCell>
-                    <TableCell align='right'>Freestyle</TableCell>
-                    <TableCell align='right'>Backstroke</TableCell>
-                    <TableCell align='right'>Breaststroke</TableCell>
-                    <TableCell align='right'>Butterfly</TableCell>
-                    <TableCell align='right'>IM</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {profileData2 && renderTimes(profileData2.times)}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Card>
-        </Grid>
+        {profileData.map((profile, index) => (
+          <Grid item xs={12} md={6} key={index}>
+            <Card sx={{ padding: 2 }}>
+              <Typography variant='h6' sx={{ textAlign: 'center', color: 'blue' }}>
+                {profile.semester}
+              </Typography>
+              <TableContainer component={Paper}>
+                <Table size='small' aria-label='swimming times'>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Week</TableCell>
+                      <TableCell align='right'>Freestyle</TableCell>
+                      <TableCell align='right'>Backstroke</TableCell>
+                      <TableCell align='right'>Breaststroke</TableCell>
+                      <TableCell align='right'>Butterfly</TableCell>
+                      <TableCell align='right'>IM</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>{renderTimes(profile.times)}</TableBody>
+                </Table>
+              </TableContainer>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
 
       <Divider sx={{ marginTop: 5, marginBottom: 3 }} />
 
-      <Typography
-        variant='h5'
-        sx={{ marginBottom: 4, textAlign: 'center', color: 'blue' }}
-      >
+      <Typography variant='h5' sx={{ marginBottom: 4, textAlign: 'center', color: 'blue' }}>
         Personal Best Times
       </Typography>
 
@@ -247,32 +198,14 @@ export default function Profile() {
           borderRadius: '8px',
         }}
       >
-        <Card
-          sx={{
-            padding: 2,
-            textAlign: 'center',
-            maxWidth: 300,
-            margin: '0 auto',
-          }}
-         
-        >
-          <Typography variant='h6'>
-            Freestyle: {personalBestTimes.freestyle}
-          </Typography>
-          <Typography variant='h6'>
-            Backstroke: {personalBestTimes.backstroke}
-          </Typography>
-          <Typography variant='h6'>
-            Breaststroke: {personalBestTimes.breaststroke}
-          </Typography>
-          <Typography variant='h6'>
-            Butterfly: {personalBestTimes.butterfly}
-          </Typography>
+        <Card sx={{ padding: 2, textAlign: 'center', maxWidth: 300, margin: '0 auto' }}>
+          <Typography variant='h6'>Freestyle: {personalBestTimes.freestyle}</Typography>
+          <Typography variant='h6'>Backstroke: {personalBestTimes.backstroke}</Typography>
+          <Typography variant='h6'>Breaststroke: {personalBestTimes.breaststroke}</Typography>
+          <Typography variant='h6'>Butterfly: {personalBestTimes.butterfly}</Typography>
           <Typography variant='h6'>IM: {personalBestTimes.IM}</Typography>
         </Card>
-
       </Box>
-  
     </div>
   );
 }

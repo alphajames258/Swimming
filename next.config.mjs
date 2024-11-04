@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/TablePage', // Replace with your desired default route
+        destination: '/home', // Replace with your desired default route
         permanent: true,
       },
     ];

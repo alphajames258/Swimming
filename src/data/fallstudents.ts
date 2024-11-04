@@ -227,6 +227,6 @@ export const mockStudentData2 = [
 
 ];
 
-export const swimmingApi = {
+export const swimmingFall = {
 '2024Fall': mockStudentData2,
 };
