@@ -8,24 +8,11 @@ const headerStyle = {
   backgroundColor: 'white',
   color: 'white',
   padding: '5px 20px',
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
+  textAlign: 'center',
   boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Subtle bottom shadow
 };
 
-const titleStyle = {
-  fontSize: '24px',
-  fontWeight: 'bold',
-  color: PERSIAN_BLUE,
-};
 
-const buttonStyle = {
-  fontSize: '24px',
-  fontWeight: 'bold',
-
-  padding: '0',
-};
 
 const Logo = () => {
   const router = useRouter();
@@ -54,13 +41,7 @@ function Header() {
   return (
     <div style={headerStyle}>
       <Logo />
-      <Button
-        variant='outlined'
-        sx={buttonStyle}
-        onClick={handleButtonClick} // Attach click handler
-      >
-        Test Your Speed
-      </Button>
+      
     </div>
   );
 }
