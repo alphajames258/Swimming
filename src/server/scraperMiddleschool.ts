@@ -1,8 +1,11 @@
-import 'dotenv/config';
 import puppeteer from 'puppeteer';
 import { setToFirebase } from './firebase/firebase';
 import {
-  MIDDLESCHOOL,
+  middleschool,
+  MIDDLESCHOOL_100_IM_2023_2024,
+  MIDDLESCHOOL_50_BACK_2023_2024,
+  MIDDLESCHOOL_50_BREAST_2023_2024,
+  MIDDLESCHOOL_50_FLY_2023_2024,
   MIDDLESCHOOL_50_FREE_2023_2024,
   NYC_50_FREE_2023_2024,
   SWIM_CLOUD,
@@ -20,19 +23,21 @@ const sleep = ms => new Promise(res => setTimeout(res, ms));
 (async () => {
   // Launch the browser and open a new blank page
   const browser = await puppeteer.launch({ headless: false });
-  console.log('Firebase API Key:', process.env.FIREBASE_APIKEY);
 
   const page = await browser.newPage();
 
   const allSwimmerData: Swimmer[] = [];
 
-  const url = MIDDLESCHOOL;
+  const mEvent = MIDDLESCHOOL_100_IM_2023_2024;
+  const event = middleschool[mEvent];
+
+  const url = event.link;
 
   // Navigate to the current page
   await page.goto(url);
 
   // Loop through pages 1 to 14
-  for (let pageNum = 1; pageNum <= 31; pageNum++) {
+  for (let pageNum = 1; pageNum <= event.pages; pageNum++) {
     // Construct the URL with the current page number
 
     await page.waitForSelector('tbody');
@@ -69,7 +74,7 @@ const sleep = ms => new Promise(res => setTimeout(res, ms));
     });
 
     const lastPaginationSelector =
-      '.c-pagination .c-pagination__item:nth-child(12) .c-pagination__action';
+      '.c-pagination .c-pagination__item:nth-child(8) .c-pagination__action';
 
     // Wait for the last pagination button to be available in the DOM
     await page.waitForSelector(lastPaginationSelector);
@@ -84,11 +89,7 @@ const sleep = ms => new Promise(res => setTimeout(res, ms));
   }
 
   console.log(allSwimmerData, 'All swimmer data collected');
-  await setToFirebase(
-    SWIM_CLOUD,
-    MIDDLESCHOOL_50_FREE_2023_2024,
-    allSwimmerData
-  );
+  await setToFirebase(SWIM_CLOUD, mEvent, allSwimmerData);
 
   await browser.close();
 })();
