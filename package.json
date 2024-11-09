@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "scrape": "node src/server/scraper.js",
-    "scrape-2": "node src/server/scraperMiddleschool.ts"
+    "scrape-2": "tsx src/server/scraperMiddleschool.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
