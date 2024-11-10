@@ -6,7 +6,7 @@ import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore';
 import { getTodaysDate } from '../../utils/date.ts';
 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { firebaseConfig } from '../../../local.ts';
+// import { firebaseConfig } from '../../../local.ts';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
