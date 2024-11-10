@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -6,20 +5,50 @@ import { SWIM_CLOUD, NYC_50_FREE_2023_2024 } from './constants.ts';
 import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore';
 import { getTodaysDate } from '../../utils/date.ts';
 
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+// Only use if scraping
+// import { firebaseConfig } from '../../../local.ts';
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_APIKEY,
-  authDomain: process.env.FIREBASE_AUTHDOMAIN,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID,
-  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+  apiKey: process.env.NEXT_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.NEXT_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.NEXT_FIREBASE_MSID,
+  appId: process.env.NEXT_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_FIREBASE_MID,
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Only use if scraping locally
+// (async () => {
+//   const uid = await signIn(firebaseConfig.username, firebaseConfig.password);
+//   if (uid) {
+//     console.log('Authenticated user UID:', uid);
+//     // Now you can use the UID for user-specific operations
+//   }
+// })();
+
+export async function signIn(email: string, password: string) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    console.log('User signed in:', userCredential.user.uid);
+    return userCredential.user.uid;
+  } catch (error) {
+    console.error('Error signing in:', error);
+  }
+}
+
+// Example usage
 
 const firestore = getFirestore(app);
 
@@ -36,9 +65,6 @@ export async function setToFirebase(collection, document, data) {
   );
   return;
 }
-
-// setToFirebase(SWIM_CLOUD, NYC_50_FREE_2023_2024, { test: '1234' });
-
 export async function getFirebaseStore(collection, document) {
   const docSnap = await getDoc(doc(firestore, collection, document));
   if (docSnap.exists()) {
