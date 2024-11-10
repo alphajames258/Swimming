@@ -6,31 +6,33 @@ import { getFirestore, setDoc, doc, getDoc } from 'firebase/firestore';
 import { getTodaysDate } from '../../utils/date.ts';
 
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+// Only use if scraping
 // import { firebaseConfig } from '../../../local.ts';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-// const firebaseConfig = {
-//   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-//   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTHDOMAIN,
-//   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-//   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGEBUCKET,
-//   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MSID,
-//   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-//   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MID,
-// };
+const firebaseConfig = {
+  apiKey: process.env.NEXT_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.NEXT_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.NEXT_FIREBASE_MSID,
+  appId: process.env.NEXT_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_FIREBASE_MID,
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-(async () => {
-  const uid = await signIn('anthonylee2797@gmail.com', 'test123');
-  if (uid) {
-    console.log('Authenticated user UID:', uid);
-    // Now you can use the UID for user-specific operations
-  }
-})();
+// Only use if scraping locally
+// (async () => {
+//   const uid = await signIn(firebaseConfig.username, firebaseConfig.password);
+//   if (uid) {
+//     console.log('Authenticated user UID:', uid);
+//     // Now you can use the UID for user-specific operations
+//   }
+// })();
 
 export async function signIn(email: string, password: string) {
   try {
