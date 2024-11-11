@@ -11,6 +11,7 @@ import {
   convertTimeToSeconds,
 } from '../../utils/calculate';
 import Analysis from '../../components/Analysis/Analysis';
+import { EVENTS } from '../../constants/swimmingConstants';
 
 const styles = {
   Paper: { padding: 3, maxWidth: '500px', margin: 'auto', mt: '40px' },
@@ -39,7 +40,7 @@ const styles = {
 
 export default function SwimmingForm() {
   const [age, setAge] = useState<string>('');
-  const [event, setEvent] = useState<string>('50 Yard Freestyle');
+  const [event, setEvent] = useState(EVENTS[0]);
   const [minutes, setMinutes] = useState<string>('');
   const [seconds, setSeconds] = useState<string>('');
   const [milliseconds, setMilliseconds] = useState<string>('');
@@ -57,14 +58,28 @@ export default function SwimmingForm() {
     e.preventDefault();
     const time = convertTimeToSeconds(minutes, seconds, milliseconds);
     const formData = { age, event, time, gender };
-    const data = await fetch('/api/swimming_v1').then(res => res.json());
-    const swimmers = data.data;
-    const analysisData = analyzeSwimmerPerformance(
-      formData,
-      swimmers,
-      0.75,
-      0.5
-    );
+    const data = await fetch('/api/swimming_v1', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ event }),
+    }).then(res => res.json());
+
+    let analysisData: any = [];
+
+    data.forEach(set => {
+      const resultData = analyzeSwimmerPerformance(
+        formData,
+        set.data,
+        0.75,
+        0.5
+      );
+      analysisData = [...analysisData, resultData];
+    });
+
+    console.log(analysisData, 'anthony analysis data');
+
     setAnalysis(analysisData);
   };
 
@@ -133,7 +148,7 @@ export default function SwimmingForm() {
           </form>
         </Card>
       </Paper>
-      {analysis && <Analysis analysis={analysis} />}
+      {analysis && analysis.map(el => <Analysis key='hi' analysis={el} />)}
     </>
   );
 }
