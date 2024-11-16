@@ -2,15 +2,13 @@ export function analyzeSwimmerPerformance(
   formData,
   totalSwimmers,
   firstPercent,
-  secondPercent
+  secondPercent,
+  event
 ) {
-  console.log(totalSwimmers, 'anthony total swimmers');
   const parsedSwimmers = totalSwimmers.map(swimmer => ({
     ...swimmer,
     time: convertTimeStringToSeconds(swimmer.time),
   }));
-
-  console.log(parsedSwimmers, 'anthony parsed swimmers');
 
   const timeToFloat = parseFloat(formData.time);
 
@@ -33,14 +31,30 @@ export function analyzeSwimmerPerformance(
 
   const slightlyBetterSwimmer = parsedSwimmers[firstIndex];
   const betterSwimmer = parsedSwimmers[secondIndex];
-  console.log(parsedSwimmers, secondIndex, 'anthony parsed swimmers');
+
   const percentile = ((formDataIndex / parsedSwimmers.length) * 100).toFixed(2);
+
+  if (formDataIndex === 0) {
+    return {
+      time: timeToFloat,
+      percentile,
+      slightlyBetterSwimmer,
+      betterSwimmer,
+      bestSwimmer: parsedSwimmers[1],
+      classification: event,
+      ranking: formDataIndex,
+      totalSwimmers: parsedSwimmers.length,
+    };
+  }
 
   return {
     time: timeToFloat,
     percentile,
     slightlyBetterSwimmer,
     betterSwimmer,
+    classification: event,
+    ranking: formDataIndex,
+    totalSwimmers: parsedSwimmers.length,
   };
 }
 

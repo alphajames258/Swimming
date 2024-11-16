@@ -73,12 +73,11 @@ export default function SwimmingForm() {
         formData,
         set.data,
         0.75,
-        0.5
+        0.5,
+        set.event
       );
       analysisData = [...analysisData, resultData];
     });
-
-    console.log(analysisData, 'anthony analysis data');
 
     setAnalysis(analysisData);
   };
@@ -88,26 +87,26 @@ export default function SwimmingForm() {
     return num >= 0 && num < max;
   };
 
-  const validateAge = (value: string) => {
-    const valueNumber = Number(value);
-    if (valueNumber > 60 || valueNumber <= 0 || isNaN(valueNumber)) {
-      setAgeError(true);
-    } else {
-      setAgeError(false);
-    }
-  };
+  // const validateAge = (value: string) => {
+  //   const valueNumber = Number(value);
+  //   if (valueNumber > 60 || valueNumber <= 0 || isNaN(valueNumber)) {
+  //     setAgeError(true);
+  //   } else {
+  //     setAgeError(false);
+  //   }
+  // };
 
   return (
     <>
       <Paper sx={styles.Paper}>
-        <Card sx={{ padding: 2, boxShadow: 'none' }}>
+        <Card sx={{ padding: 1, boxShadow: 'none' }}>
           <form onSubmit={handleSubmit} style={{ width: '100%' }}>
-            <AgeField
+            {/* <AgeField
               age={age}
               setAge={setAge}
               ageError={ageError}
               validateAge={validateAge}
-            />
+            /> */}
 
             <EventSelector
               event={event}
@@ -148,7 +147,7 @@ export default function SwimmingForm() {
           </form>
         </Card>
       </Paper>
-      {analysis && analysis.map(el => <Analysis key='hi' analysis={el} />)}
+      {analysis && <Analysis key='hi' analysis={analysis} event={event} />}
     </>
   );
 }

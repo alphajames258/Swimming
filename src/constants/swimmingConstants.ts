@@ -27,6 +27,16 @@ export const mapWeekToString = {
   [WEEK_TEN]: 'Week Ten',
 };
 
+export const NYC_HIGHSCHOOL = [NYC_50_FREE_2023_2024];
+
+export const US_MIDDLESCHOOL = [
+  MIDDLESCHOOL_100_IM_2023_2024,
+  MIDDLESCHOOL_50_BACK_2023_2024,
+  MIDDLESCHOOL_50_BREAST_2023_2024,
+  MIDDLESCHOOL_50_FLY_2023_2024,
+  MIDDLESCHOOL_50_FREE_2023_2024,
+];
+
 const EVENTS = [
   {
     name: '50 Yard Freestyle',
