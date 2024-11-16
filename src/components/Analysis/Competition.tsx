@@ -1,4 +1,4 @@
-import { Box, Link, Typography } from '@mui/material';
+import { Box, Link, styled, Typography } from '@mui/material';
 
 const styles = {
   leftAnalysisText: {
@@ -18,34 +18,80 @@ const styles = {
   },
 };
 
-const Competition = ({ analysis }) => {
+const StyledLink = styled(Link)(({ theme }) => ({
+  'textDecoration': 'none',
+  'color': theme.palette.primary.main,
+  'fontWeight': 'bold',
+  '&:hover': {
+    textDecoration: 'underline',
+    color: theme.palette.primary.dark,
+  },
+  '&:active': {
+    color: theme.palette.primary.light,
+  },
+}));
+
+const Competition = ({ analysis, isSmallScreen }) => {
+  const { ranking } = analysis;
+
+  if (ranking === 0) {
+    return (
+      <Box
+        sx={{
+          color: 'black',
+          width: isSmallScreen ? '100%' : '60%',
+          padding: isSmallScreen ? '10px 0px' : '10px',
+        }}
+      >
+        <Typography variant='body1'>
+          <StyledLink
+            style={{ fontSize: '20px' }}
+            target='_blank'
+            href={analysis.bestSwimmer.profileLink}
+          >
+            {analysis.bestSwimmer.name}
+          </StyledLink>{' '}
+          is the next fastest swimmer with a time of{' '}
+          <strong style={{ fontSize: '20px' }}>
+            {analysis.bestSwimmer.time}s
+          </strong>
+        </Typography>
+      </Box>
+    );
+  }
+
   return (
-    <Box sx={{ color: 'black', width: '50%', padding: '5px' }}>
-      <Typography variant='h6' sx={styles.leftAnalysisText}>
-        <strong>Check out the competition</strong>
-      </Typography>
-      <Typography variant='body1'>
-        <Link
-          style={{ fontSize: '20px' }}
-          target='_blank'
-          href={analysis.slightlyBetterSwimmer.profileLink}
-        >
-          {analysis.slightlyBetterSwimmer.name}
-        </Link>{' '}
-        is slighly faster than you at{' '}
-        <strong style={{ fontSize: '20px' }}>
-          {analysis.slightlyBetterSwimmer.time}s
-        </strong>
-      </Typography>
+    <Box
+      sx={{
+        color: 'black',
+        width: isSmallScreen ? '100%' : '60%',
+        padding: isSmallScreen ? '10px 0px' : '10px',
+      }}
+    >
+      {ranking !== 1 && (
+        <Typography variant='body1'>
+          <StyledLink
+            style={{ fontSize: '20px' }}
+            target='_blank'
+            href={analysis.slightlyBetterSwimmer.profileLink}
+          >
+            {analysis.slightlyBetterSwimmer.name}
+          </StyledLink>{' '}
+          is slightly faster than you at{' '}
+          <strong style={{ fontSize: '20px' }}>
+            {analysis.slightlyBetterSwimmer.time}s
+          </strong>
+        </Typography>
+      )}
 
       <Typography variant='body1'>
-        <Link
+        <StyledLink
           style={{ fontSize: '20px' }}
           target='_blank'
           href={analysis.betterSwimmer.profileLink}
         >
           {analysis.betterSwimmer.name}
-        </Link>{' '}
+        </StyledLink>{' '}
         is faster than you at{' '}
         <strong style={{ fontSize: '20px' }}>
           {analysis.betterSwimmer.time}s

@@ -74,5 +74,3 @@ export async function getFirebaseStore(collection, document) {
     console.log('No such document!');
   }
 }
-
-getFirebaseStore(SWIM_CLOUD, NYC_50_FREE_2023_2024);

@@ -15,9 +15,7 @@ import Image from 'next/image';
 
 export default function EventSelect({ open, onClose, onSelect }) {
   const [search, setSearch] = useState('');
-  const filteredEvent = EVENTS.filter(event =>
-    event.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredEvent = EVENTS;
 
   return (
     <Dialog open={open} fullWidth maxWidth='sm' onClose={onClose}>
@@ -32,11 +30,7 @@ export default function EventSelect({ open, onClose, onSelect }) {
         />
         <List>
           {filteredEvent.map(event => (
-            <ListItem
-              button
-              onClick={() => onSelect(event.name)}
-              key={event.name}
-            >
+            <ListItem button onClick={() => onSelect(event)} key={event.name}>
               <Image
                 src={event.imgSrc}
                 alt={event.name}
