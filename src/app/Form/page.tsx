@@ -11,6 +11,7 @@ import {
   convertTimeToSeconds,
 } from '../../utils/calculate';
 import Analysis from '../../components/Analysis/Analysis';
+import { EVENTS } from '../../constants/swimmingConstants';
 
 const styles = {
   Paper: { padding: 3, maxWidth: '500px', margin: 'auto', mt: '40px' },
@@ -39,7 +40,7 @@ const styles = {
 
 export default function SwimmingForm() {
   const [age, setAge] = useState<string>('');
-  const [event, setEvent] = useState<string>('50 Yard Freestyle');
+  const [event, setEvent] = useState(EVENTS[0]);
   const [minutes, setMinutes] = useState<string>('');
   const [seconds, setSeconds] = useState<string>('');
   const [milliseconds, setMilliseconds] = useState<string>('');
@@ -57,14 +58,27 @@ export default function SwimmingForm() {
     e.preventDefault();
     const time = convertTimeToSeconds(minutes, seconds, milliseconds);
     const formData = { age, event, time, gender };
-    const data = await fetch('/api/swimming_v1').then(res => res.json());
-    const swimmers = data.data;
-    const analysisData = analyzeSwimmerPerformance(
-      formData,
-      swimmers,
-      0.75,
-      0.5
-    );
+    const data = await fetch('/api/swimming_v1', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ event }),
+    }).then(res => res.json());
+
+    let analysisData: any = [];
+
+    data.forEach(set => {
+      const resultData = analyzeSwimmerPerformance(
+        formData,
+        set.data,
+        0.75,
+        0.5,
+        set.event
+      );
+      analysisData = [...analysisData, resultData];
+    });
+
     setAnalysis(analysisData);
   };
 
@@ -73,26 +87,26 @@ export default function SwimmingForm() {
     return num >= 0 && num < max;
   };
 
-  const validateAge = (value: string) => {
-    const valueNumber = Number(value);
-    if (valueNumber > 60 || valueNumber <= 0 || isNaN(valueNumber)) {
-      setAgeError(true);
-    } else {
-      setAgeError(false);
-    }
-  };
+  // const validateAge = (value: string) => {
+  //   const valueNumber = Number(value);
+  //   if (valueNumber > 60 || valueNumber <= 0 || isNaN(valueNumber)) {
+  //     setAgeError(true);
+  //   } else {
+  //     setAgeError(false);
+  //   }
+  // };
 
   return (
     <>
       <Paper sx={styles.Paper}>
-        <Card sx={{ padding: 2, boxShadow: 'none' }}>
+        <Card sx={{ padding: 1, boxShadow: 'none' }}>
           <form onSubmit={handleSubmit} style={{ width: '100%' }}>
-            <AgeField
+            {/* <AgeField
               age={age}
               setAge={setAge}
               ageError={ageError}
               validateAge={validateAge}
-            />
+            /> */}
 
             <EventSelector
               event={event}
@@ -133,7 +147,7 @@ export default function SwimmingForm() {
           </form>
         </Card>
       </Paper>
-      {analysis && <Analysis analysis={analysis} />}
+      {analysis && <Analysis key='hi' analysis={analysis} event={event} />}
     </>
   );
 }
