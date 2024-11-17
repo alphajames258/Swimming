@@ -14,7 +14,14 @@ import Analysis from '../../components/Analysis/Analysis';
 import { EVENTS } from '../../constants/swimmingConstants';
 
 const styles = {
-  Paper: { padding: 3, width: '70%' },
+  Paper: {
+    padding: 3,
+    width: '70%',
+    border: '1px solid #ccc',
+    borderRadius: '8px',
+    backgroundColor: '#f9f9f9',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+  },
   SubmitButton: {
     mt: 3,
     fontWeight: 800,
@@ -112,7 +119,9 @@ export default function SwimmingForm() {
         }}
       >
         <Paper sx={styles.Paper}>
-          <Card sx={{ padding: 1, boxShadow: 'none' }}>
+          <Card
+            sx={{ padding: 1, boxShadow: 'none', backgroundColor: '#f9f9f9' }}
+          >
             <form onSubmit={handleSubmit} style={{ width: '100%' }}>
               {/* <AgeField
               age={age}
