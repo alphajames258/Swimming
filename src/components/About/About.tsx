@@ -1,57 +1,64 @@
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import React from 'react';
+import { Typography, Box, Link, Divider } from '@mui/material';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 const About = () => {
   return (
     <Box
+      component='footer'
       sx={{
-        textAlign: 'center',
+        width: '100%',
         padding: '20px',
-        marginTop: '50px',
+        textAlign: 'center',
+        borderRadius: '8px',
         color: 'black',
       }}
     >
-      <Typography variant='h6' fontWeight='bold'>
-        About This Website
+      <Divider sx={{ marginBottom: '20px' }} />
+      <Typography variant='h6' fontWeight='bold' gutterBottom>
+        Connect with me
       </Typography>
-      <Typography variant='body1' paragraph>
-        Hi, My name is James Lee. I created this website for swimmers who are
-        passionate about competing and getting faster.
-      </Typography>
-      <Typography variant='body1' paragraph>
-        As a former swimmer, I know how important it is to track your progress
-        and understand your benchmarks. This platform is dedicated to helping
-        swimmers achieve their goals.
-      </Typography>
-      <Typography variant='body1' gutterBottom>
-        Connect with me:
-      </Typography>
-      <Link
-        href='https://www.linkedin.com/in/james-lee-a7b2842b6/'
+      <Box
         sx={{
-          'marginRight': '10px',
-          'textDecoration': 'none',
-          '&:hover': { textDecoration: 'underline' },
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '20px',
+          marginTop: '10px',
         }}
-        rel='noopener'
-        target='_blank'
       >
-        LinkedIn
-      </Link>
-      <Link
-        href='https://github.com/alphajames258'
-        sx={{
-          'textDecoration': 'none',
-          '&:hover': { textDecoration: 'underline' },
-        }}
-        target='_blank'
-        rel='noopener'
-      >
-        GitHub
-      </Link>
+        <Link
+          href='https://www.linkedin.com/in/james-lee-a7b2842b6/'
+          sx={{
+            'display': 'flex',
+            'alignItems': 'center',
+            'textDecoration': 'none',
+            'color': 'primary.main',
+            '&:hover': { textDecoration: 'underline' },
+          }}
+          rel='noopener'
+          target='_blank'
+        >
+          <LinkedInIcon sx={{ marginRight: '5px' }} />
+          LinkedIn
+        </Link>
+        <Link
+          href='https://github.com/alphajames258'
+          sx={{
+            'display': 'flex',
+            'alignItems': 'center',
+            'textDecoration': 'none',
+            'color': 'primary.main',
+            '&:hover': { textDecoration: 'underline' },
+          }}
+          target='_blank'
+          rel='noopener'
+        >
+          <GitHubIcon sx={{ marginRight: '5px' }} />
+          GitHub
+        </Link>
+      </Box>
     </Box>
   );
 };
-
 export default About;

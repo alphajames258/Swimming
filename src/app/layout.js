@@ -14,7 +14,9 @@ const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <body>
+      <body
+        style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}
+      >
         <Header />
         <ThemeProvider theme={theme}>{children}</ThemeProvider>
         <About />
