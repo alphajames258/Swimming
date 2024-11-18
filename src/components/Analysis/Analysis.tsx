@@ -12,13 +12,15 @@ import { PerformanceRating } from './Ranking';
 
 const styles = {
   mainContainer: {
-    border: '2px solid black',
+    border: '2px solid #ccc',
     padding: '20px',
     borderRadius: '20px',
     width: '80%',
     margin: 'auto',
     background: SPINDLE,
     marginTop: '20px',
+    // backgroundColor: '#f9f9f9',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
   },
   leftAnalysisText: {
     margin: '10px 0',

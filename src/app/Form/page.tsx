@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Button, Card, Paper, Divider } from '@mui/material';
+import { Button, Card, Paper, Divider, Box, Typography } from '@mui/material';
 import AgeField from './components/Age';
 import EventSelector from './components/EventSelector';
 import Time from './components/Time';
@@ -14,7 +14,14 @@ import Analysis from '../../components/Analysis/Analysis';
 import { EVENTS } from '../../constants/swimmingConstants';
 
 const styles = {
-  Paper: { padding: 3, maxWidth: '500px', margin: 'auto', mt: '40px' },
+  Paper: {
+    padding: 3,
+    width: '70%',
+    border: '1px solid #ccc',
+    borderRadius: '8px',
+    backgroundColor: '#f9f9f9',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+  },
   SubmitButton: {
     mt: 3,
     fontWeight: 800,
@@ -97,57 +104,107 @@ export default function SwimmingForm() {
   // };
 
   return (
-    <>
-      <Paper sx={styles.Paper}>
-        <Card sx={{ padding: 1, boxShadow: 'none' }}>
-          <form onSubmit={handleSubmit} style={{ width: '100%' }}>
-            {/* <AgeField
+    <Box
+      sx={{
+        minHeight: '100vh',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          margin: '40px auto',
+          maxWidth: '1300px',
+        }}
+      >
+        <Paper sx={styles.Paper}>
+          <Card
+            sx={{ padding: 1, boxShadow: 'none', backgroundColor: '#f9f9f9' }}
+          >
+            <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+              {/* <AgeField
               age={age}
               setAge={setAge}
               ageError={ageError}
               validateAge={validateAge}
             /> */}
 
-            <EventSelector
-              event={event}
-              setEvent={setEvent}
-              popup={popup}
-              setPopup={setPopup}
-            />
+              <EventSelector
+                event={event}
+                setEvent={setEvent}
+                popup={popup}
+                setPopup={setPopup}
+              />
 
-            <Divider sx={{ my: 2 }} />
+              <Divider sx={{ my: 2 }} />
 
-            <Time
-              minutes={minutes}
-              setMinutes={setMinutes}
-              minutesError={minutesError}
-              seconds={seconds}
-              setSeconds={setSeconds}
-              setSecondsError={setSecondsError}
-              secondsError={secondsError}
-              milliseconds={milliseconds}
-              setMilliseconds={setMilliseconds}
-              setMinutesError={setMinutesError}
-              millisecondsError={millisecondsError}
-              setMillisecondsError={setMillisecondsError}
-              validateNumber={validateNumber}
-            />
+              <Time
+                minutes={minutes}
+                setMinutes={setMinutes}
+                minutesError={minutesError}
+                seconds={seconds}
+                setSeconds={setSeconds}
+                setSecondsError={setSecondsError}
+                secondsError={secondsError}
+                milliseconds={milliseconds}
+                setMilliseconds={setMilliseconds}
+                setMinutesError={setMinutesError}
+                millisecondsError={millisecondsError}
+                setMillisecondsError={setMillisecondsError}
+                validateNumber={validateNumber}
+              />
 
-            <Gender gender={gender} setGender={setGender} />
+              <Gender gender={gender} setGender={setGender} />
 
-            <Button
-              type='submit'
-              variant='contained'
-              color='primary'
-              fullWidth
-              sx={styles.SubmitButton}
-            >
-              Calculate
-            </Button>
-          </form>
-        </Card>
-      </Paper>
+              <Button
+                type='submit'
+                variant='contained'
+                color='primary'
+                fullWidth
+                sx={styles.SubmitButton}
+              >
+                Calculate
+              </Button>
+            </form>
+          </Card>
+        </Paper>
+        <Box
+          sx={{
+            width: '50%',
+            marginLeft: '10px',
+            padding: '20px',
+            border: '1px solid #ccc',
+            borderRadius: '8px',
+            backgroundColor: '#f9f9f9',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            height: 'auto', // Adjust the height as needed
+          }}
+        >
+          <Typography variant='h6' color='textPrimary' gutterBottom>
+            Measure Your Performance
+          </Typography>
+          <Typography variant='body1' color='textSecondary' paragraph>
+            The competitive swimming calculator is a tool designed for swimmers
+            who want to compare their performance to other swimmers across the
+            country.
+          </Typography>
+          <Typography variant='body1' color='textSecondary' paragraph>
+            By entering your swim time and selecting your event, you can see how
+            you rank among high school and middle school swimmers registered on
+            SwimCloud.
+          </Typography>
+          <Typography variant='body1' color='textSecondary' paragraph>
+            The calculator currently uses data from the 2023-2024 season and
+            will be updated with more data sets over time to provide more
+            comprehensive comparisons.
+          </Typography>
+        </Box>
+      </Box>
       {analysis && <Analysis key='hi' analysis={analysis} event={event} />}
-    </>
+    </Box>
   );
 }
