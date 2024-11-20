@@ -8,9 +8,13 @@ import {
   Typography,
   Grid,
   Container,
+  Button,
 } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { Calculate, LockClock } from '@mui/icons-material';
+import Image from 'next/image';
+import { PERSIAN_BLUE, SPINDLE } from '../../constants/colors';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const options = [
   {
@@ -23,7 +27,7 @@ const options = [
     label: 'Calculator',
     route: '/Form',
     description: 'Calculate and compare your swimming performance',
-    icon: <Calculate fontSize='large' sx={{ color: '#0073e6' }} />,
+    icon: <Calculate sx={{ color: '#0073e6' }} />,
   },
   {
     label: 'Check-In',
@@ -43,44 +47,83 @@ export default function HomePage() {
   return (
     <Box
       sx={{
-        minHeight: '100vh',
-        py: 8,
+        minHeight: '90vh',
         position: 'relative',
         overflow: 'hidden',
       }}
     >
       <Box
         sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          padding: { xs: 2, md: 6 },
+          minHeight: '60vh',
         }}
-      />
-
-      <Container maxWidth='sm' sx={{ textAlign: 'center', mb: 6 }}>
-        <Typography
-          variant='h3'
-          component='h1'
-          gutterBottom
-          sx={{ fontWeight: 'bold', color: '#1976d2' }}
-        >
-          Welcome to the Swim Benchmark
-        </Typography>
-        <Typography
-          variant='h6'
-          color='textSecondary'
-          sx={{ fontStyle: 'italic', fontWeight: 300 }}
-        >
-          Track your progress, view your times, and compare your results with
-          others.
-        </Typography>
-        <Typography variant='h6' color='textSecondary' sx={{ mt: 2 }}>
-          Don’t forget to <strong>check in</strong> for Saturday and Sunday!
-        </Typography>
-      </Container>
-
+      >
+        <Box sx={{ mb: { xs: 4, md: 0 }, maxWidth: { xs: '100%', md: '50%' } }}>
+          <Typography
+            variant='h3'
+            component='h1'
+            gutterBottom
+            sx={{ color: '#333', fontWeight: 'bold' }}
+          >
+            Learn about your competition
+          </Typography>
+          <Typography variant='h6' sx={{ color: '#555', fontWeight: 300 }}>
+            This website is designed to help you progress in your swimming
+            journey. As I myself am a former competitive swimmer, I know how
+            important it is to benchmark yourself against the best.
+          </Typography>
+          <Typography variant='h6' sx={{ color: '#555', mt: 2 }}>
+            If you are part of my class, feel free to view your times and check
+            into class.
+          </Typography>
+          <Button
+            type='submit'
+            variant='contained'
+            color='primary'
+            onClick={() => handleNavigation('/Form')}
+            sx={{
+              'mt': 3,
+              'fontSize': '18px',
+              'fontWeight': 800,
+              'color': PERSIAN_BLUE,
+              'backgroundColor': SPINDLE,
+              'padding': '9px 15px',
+              'borderRadius': '8px',
+              'textTransform': 'none',
+              'boxShadow': '0 4px 12px rgba(0, 0, 0, 0.1)',
+              'transition': 'all 0.3s ease',
+              '&:hover': {
+                backgroundColor: PERSIAN_BLUE,
+                color: SPINDLE,
+                boxShadow: '0 6px 16px rgba(0, 0, 0, 0.2)',
+                transform: 'translateY(-2px)',
+              },
+              'display': 'flex',
+              'alignItems': 'center',
+              'justifyContent': 'center',
+            }}
+          >
+            Benchmark your times against the best
+            <ArrowForwardIcon sx={{ ml: 1 }} />
+          </Button>
+        </Box>
+        <Box sx={{ maxWidth: { xs: '100%', md: '50%' }, textAlign: 'center' }}>
+          <Image
+            height={300}
+            width={600}
+            alt='competitive swimmer'
+            src='https://img.olympics.com/images/image/private/t_s_16_9_g_auto/t_s_w1460/f_auto/primary/piultz6nngltq541xmju'
+            style={{
+              borderRadius: '8px',
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+            }}
+          />
+        </Box>
+      </Box>
       <Container maxWidth='md'>
         <Grid container spacing={4} justifyContent='center'>
           {options.map(option => (
