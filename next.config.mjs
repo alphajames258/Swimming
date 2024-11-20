@@ -16,6 +16,9 @@ const nextConfig = {
     // Ignore TypeScript errors during build
     ignoreBuildErrors: true,
   },
+  images: {
+    domains: ['img.olympics.com'], // Add the hostname here
+  },
 };
 
 export default nextConfig;

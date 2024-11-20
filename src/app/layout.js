@@ -5,7 +5,6 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from '../utils/theme';
 import About from '../components/About/About';
 import { Analytics } from '@vercel/analytics/react';
-import Head from 'next/head';
 
 const metadata = {
   title: 'Tools for Young Competitive Swimmers | Improve Performance',
@@ -16,10 +15,10 @@ const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
-      <Head>
+      <head>
         <title>{metadata.title}</title>
         <meta name='description' content={metadata.description} />
-      </Head>
+      </head>
       <body>
         <Header />
         <ThemeProvider theme={theme}>{children}</ThemeProvider>

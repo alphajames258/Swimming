@@ -8,11 +8,8 @@ const headerStyle = {
   backgroundColor: 'white',
   color: 'white',
   padding: '5px 20px',
-  textAlign: 'center',
   boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Subtle bottom shadow
 };
-
-
 
 const Logo = () => {
   const router = useRouter();
@@ -41,7 +38,6 @@ function Header() {
   return (
     <div style={headerStyle}>
       <Logo />
-      
     </div>
   );
 }
