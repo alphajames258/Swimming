@@ -4,6 +4,7 @@ export const mockStudentData2 = [
     id: 0,
     name: 'Charlotte Li',
     age: 15,
+    birthday: '08-23-2009',
     times: {
       weekOne: {
         freestyle: 29.95,
@@ -18,6 +19,7 @@ export const mockStudentData2 = [
     id: 1,
     name: 'Cody Wu',
     age: 13,
+    birthday: '02-14-2011',
     times: {
       weekOne: {
         freestyle: 27.45,
@@ -32,6 +34,7 @@ export const mockStudentData2 = [
     id: 2,
     name: 'Rafael Liao',
     age: 16,
+    birthday: '05-19-2008',
     times: {
       weekOne: {
         freestyle: 26.1,
@@ -46,6 +49,7 @@ export const mockStudentData2 = [
     id: 3,
     name: 'Anthony Xue',
     age: 13,
+    birthday: '11-09-2010',
     times: {
       weekOne: {
         freestyle: 30.5,
@@ -60,6 +64,7 @@ export const mockStudentData2 = [
     id: 4,
     name: 'Evan Wang',
     age: 12,
+    birthday: '06-03-2012',
     times: {
       weekOne: {
         freestyle: 32.75,
@@ -74,6 +79,7 @@ export const mockStudentData2 = [
     id: 5,
     name: 'Eric Wang',
     age: 12,
+    birthday: '12-22-2011',
     times: {
       weekOne: {
         freestyle: 34.45,
@@ -88,6 +94,7 @@ export const mockStudentData2 = [
     id: 6,
     name: 'Jayden Ko',
     age: 12,
+    birthday: '08-15-2012',
     times: {
       weekOne: {
         freestyle: 32.85,
@@ -102,6 +109,7 @@ export const mockStudentData2 = [
     id: 7,
     name: 'Julian Ko',
     age: 11,
+    birthday: '09-30-2013',
     times: {
       weekOne: {
         freestyle: 33.25,
@@ -116,6 +124,7 @@ export const mockStudentData2 = [
     id: 8,
     name: 'Catherine Kwan',
     age: 15,
+    birthday: '04-18-2009',
     times: {
       weekOne: {
         freestyle: 34.64,
@@ -130,6 +139,7 @@ export const mockStudentData2 = [
     id: 9,
     name: 'Christopher Kwan',
     age: 13,
+    birthday: '01-05-2011',
     times: {
       weekOne: {
         freestyle: 32.64,
@@ -144,6 +154,7 @@ export const mockStudentData2 = [
     id: 10,
     name: 'Shu Xin',
     age: 16,
+    birthday: '10-11-2008',
     times: {
       weekOne: {
         freestyle: 37.75,
@@ -158,6 +169,7 @@ export const mockStudentData2 = [
     id: 11,
     name: 'Xiao Wu',
     age: 16,
+    birthday: '07-24-2008',
     times: {
       weekOne: {
         freestyle: 29.95,
@@ -172,6 +184,7 @@ export const mockStudentData2 = [
     id: 12,
     name: 'Ella Ngun',
     age: 12,
+    birthday: '11-07-2012',
     times: {
       weekOne: {
         freestyle: 37.3,
@@ -186,6 +199,7 @@ export const mockStudentData2 = [
     id: 13,
     name: 'Timothy Ngun',
     age: 13,
+    birthday: '03-22-2011',
     times: {
       weekOne: {
         freestyle: 38.3,
@@ -200,6 +214,7 @@ export const mockStudentData2 = [
     id: 14,
     name: 'Owen Chen',
     age: 11,
+    birthday: '09-14-2013',
     times: {
       weekOne: {
         freestyle: 34.37,
@@ -214,6 +229,7 @@ export const mockStudentData2 = [
     id: 15,
     name: 'Raymond Lee',
     age: 11,
+    birthday: '02-25-2013',
     times: {
       weekOne: {
         freestyle: 32.21,
