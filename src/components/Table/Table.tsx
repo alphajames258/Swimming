@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Button,
+  Alert,
+  Box,
+  Typography,
+} from '@mui/material';
 import { PERSIAN_BLUE, SPINDLE } from '../../constants/colors';
-import Button from '@mui/material/Button';
-import { Alert, Box } from '@mui/material';
 import { WEEKS, mapWeekToString } from '../../constants/swimmingConstants';
 import { createTableData } from '../../utils/createTableData';
 import { mockStudentData } from '../../data/students';
@@ -16,36 +20,38 @@ import { useRouter } from 'next/navigation';
 
 const styles = {
   WeekButton: {
-    marginBottom: '0px',
-    marginRight: '5px',
-    fontWeight: 800,
-    padding: '5px 10px', // Adjust padding to make the buttons smaller
-    fontSize: '12px', // Adjust font size to make the buttons smaller
+    marginRight: '8px',
+    fontWeight: 'bold',
+    fontSize: '12px',
+    borderRadius: '12px',
+    textTransform: 'none',
   },
   TableContainer: {
-    width: 'auto',
-    margin: 'auto',
-    background: SPINDLE,
-    border: '2px black',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Added box shadow
-    padding: '10px',
-    marginBottom: '10px',
-  },
-  TableHead: {
-    fontWeight: 'bold',
-    borderBottom: '3px solid black',
+    maxWidth: '90%',
+    margin: '20px auto',
+    borderRadius: '10px',
+    boxShadow: '0 8px 15px rgba(0, 0, 0, 0.1)',
+    overflowX: 'auto',
   },
   TableHeadCell: {
     fontWeight: 'bold',
-    fontSize: '16px',
+    fontSize: '14px',
     color: PERSIAN_BLUE,
+    textAlign: 'center',
     cursor: 'pointer',
+    whiteSpace: 'nowrap',
+  },
+  TableRow: {
+    '&:nth-of-type(odd)': { backgroundColor: '#f9f9f9' },
+    '&:hover': { backgroundColor: '#e8f4fc' },
   },
   arrowUp: {
     color: 'green',
+    fontWeight: 'bold',
   },
   arrowDown: {
     color: 'red',
+    fontWeight: 'bold',
   },
 };
 
@@ -56,11 +62,11 @@ export default function TableComponent({
   selectedSemester,
 }) {
   const [sortRows, setSortRows] = useState(rows);
-
   const router = useRouter();
 
-  const handleButtonClick = (name: string | number) => {
-    router.push(`/Profile/${name}`);
+  const handleButtonClick = name => {
+    const formattedName = name.replace(/\s+/g, '').toLowerCase();
+    router.push(`/Profile/${formattedName}`);
   };
 
   useEffect(() => {
@@ -69,18 +75,17 @@ export default function TableComponent({
 
   const getPreviousWeek = week => {
     const weekIndex = WEEKS.indexOf(week);
-
     if (weekIndex <= 0) return null;
     return WEEKS[weekIndex - 1];
   };
 
-  //Ill specify it later
-  const previousWeek: any = getPreviousWeek(currentWeek);
-  const previousWeekData = createTableData(mockStudentData, previousWeek);
+  const previousWeek = getPreviousWeek(currentWeek);
+  const previousWeekData = previousWeek
+    ? createTableData(mockStudentData, previousWeek)
+    : [];
 
   const getArrow = (currentTime, previousTime) => {
     if (previousTime === 'N/A' || currentTime === 'N/A') return '';
-
     if (isNaN(previousTime) || isNaN(currentTime)) return '';
 
     if (currentTime < previousTime) {
@@ -116,204 +121,198 @@ export default function TableComponent({
     setSortRows(newrows);
   };
 
-  const WeekButtons = (
-    <Box sx={{ textAlign: 'center' }}>
-      {WEEKS.map(week => (
-        <Button
-          sx={{
-            ...styles.WeekButton,
-            border: week === currentWeek ? '1px solid black' : 'none',
-          }}
-          variant='contained'
-          key={week}
-          onClick={() => {
-            setCurrentWeek(week);
-          }}
-        >
-          {mapWeekToString[week]}
-        </Button>
-      ))}
-    </Box>
-  );
-
   return (
     <TableContainer sx={styles.TableContainer} component={Paper}>
-      <Box
-        sx={{
-          marginBottom: '10px',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}
-      >
-        <span style={{ color: 'black', fontSize: '18px', fontWeight: '1000' }}>
+      <Box sx={{ padding: '16px', textAlign: 'center' }}>
+        <Typography variant='h6' component='div' fontWeight='bold'>
           {selectedSemester} Semester
-        </span>
-        {WeekButtons}
+        </Typography>
+        <Box>
+          {WEEKS.map(week => (
+            <Button
+              key={week}
+              sx={{
+                ...styles.WeekButton,
+                backgroundColor: week === currentWeek ? SPINDLE : 'white',
+              }}
+              onClick={() => setCurrentWeek(week)}
+            >
+              {mapWeekToString[week]}
+            </Button>
+          ))}
+        </Box>
       </Box>
-      <Table size='small' sx={{ minWidth: 650 }} aria-label='simple table'>
-        <TableHead>
-          <TableRow sx={styles.TableHead}>
-            <TableCell
-              sx={{ ...styles.TableHeadCell, width: '50px' }}
-              onClick={() => Sort('age')}
-            >
-              Age
-            </TableCell>
 
-            <TableCell sx={styles.TableHeadCell} onClick={() => Sort('name')}>
-              Student
-            </TableCell>
-            <TableCell
-              sx={styles.TableHeadCell}
-              align='right'
-              onClick={() => Sort('freestyle')}
-            >
-              50 yard Freestyle
-            </TableCell>
-            <TableCell
-              sx={styles.TableHeadCell}
-              align='right'
-              onClick={() => Sort('backstroke')}
-            >
-              50 yard Backstroke
-            </TableCell>
-            <TableCell
-              sx={styles.TableHeadCell}
-              align='right'
-              onClick={() => Sort('breaststroke')}
-            >
-              50 yard Breaststroke
-            </TableCell>
-            <TableCell
-              sx={styles.TableHeadCell}
-              align='right'
-              onClick={() => Sort('butterfly')}
-            >
-              50 yard Butterfly
-            </TableCell>
-            <TableCell
-              sx={styles.TableHeadCell}
-              align='right'
-              onClick={() => Sort('IM')}
-            >
-              100 yard IM
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        {rows.length === 0 && (
-          <Alert
-            sx={{
-              position: 'absolute',
-              top: '200px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '100%',
-              maxWidth: '500px',
-              backgroundColor: '#84A4FC',
-            }}
-            color='warning'
-            severity='error'
-          >
-            No Data Please select a different week or semester
-          </Alert>
-        )}
-
-        <TableBody>
-          {sortRows.map(row => {
-            // Find the matching student from the previous week based on Name, ID DOESNT WORK
-            const prevData =
-              previousWeekData.find(prevRow => prevRow.id === row.id) || {};
-
-            const freestyleArrow = getArrow(row.freestyle, prevData.freestyle);
-            const backstrokeArrow = getArrow(
-              row.backstroke,
-              prevData.backstroke
-            );
-            const breaststrokeArrow = getArrow(
-              row.breaststroke,
-              prevData.breaststroke
-            );
-            const butterflyArrow = getArrow(row.butterfly, prevData.butterfly);
-            const imArrow = getArrow(row.IM, prevData.IM);
-
-            const name = row.name.toLowerCase().replace(/\s+/g, '');
-
-            return (
-              <TableRow
-                key={row.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+      {rows.length === 0 ? (
+        <Alert
+          sx={{
+            margin: '20px auto',
+            maxWidth: '400px',
+            backgroundColor: '#fbe9e7',
+          }}
+          severity='error'
+        >
+          No data available. Please select a different week or semester.
+        </Alert>
+      ) : (
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell sx={styles.TableHeadCell} onClick={() => Sort('age')}>
+                Age
+              </TableCell>
+              <TableCell sx={styles.TableHeadCell} onClick={() => Sort('name')}>
+                Student
+              </TableCell>
+              <TableCell
+                sx={styles.TableHeadCell}
+                onClick={() => Sort('freestyle')}
               >
-                <TableCell align='left' component='th' scope='row'>
-                  {row.age}
-                </TableCell>
-                <TableCell
-                  align='left'
-                  component='th'
-                  scope='row'
-                  onClick={() => handleButtonClick(name)} 
-                  style={{ cursor: 'pointer' }}
-                >
-                  {row.name}
-                </TableCell>
+                50y Freestyle
+              </TableCell>
+              <TableCell
+                sx={styles.TableHeadCell}
+                onClick={() => Sort('backstroke')}
+              >
+                50y Backstroke
+              </TableCell>
+              <TableCell
+                sx={styles.TableHeadCell}
+                onClick={() => Sort('breaststroke')}
+              >
+                50y Breaststroke
+              </TableCell>
+              <TableCell
+                sx={styles.TableHeadCell}
+                onClick={() => Sort('butterfly')}
+              >
+                50y Butterfly
+              </TableCell>
+              <TableCell sx={styles.TableHeadCell} onClick={() => Sort('IM')}>
+                100y IM
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {sortRows.map(row => {
 
-                <TableCell align='right'>
-                  {row.freestyle}{' '}
-                  <span
-                    style={
-                      freestyleArrow === '▲' ? styles.arrowUp : styles.arrowDown
-                    }
+              const prevData =
+                previousWeekData.find(prevRow => prevRow.id === row.id) ||
+                {};
+
+            
+              const freestyleArrow = getArrow(
+                row.freestyle,
+                prevData.freestyle
+              );
+              const backstrokeArrow = getArrow(
+                row.backstroke,
+                prevData.backstroke
+              );
+              const breaststrokeArrow = getArrow(
+                row.breaststroke,
+                prevData.breaststroke
+              );
+              const butterflyArrow = getArrow(
+                row.butterfly,
+                prevData.butterfly
+              );
+              const imArrow = getArrow(row.IM, prevData.IM);
+
+              // Format name for profile link
+              const name = row.name.toLowerCase().replace(/\s+/g, '');
+
+              return (
+                <TableRow key={row.id} sx={styles.TableRow}>
+                  <TableCell align='center'>{row.age}</TableCell>
+                  <TableCell
+                    align='center'
+                    onClick={() => handleButtonClick(name)}
+                    style={{ cursor: 'pointer', color: 'blue' }}
                   >
-                    {freestyleArrow}
-                  </span>
-                </TableCell>
-                <TableCell align='right'>
-                  {row.backstroke}{' '}
-                  <span
-                    style={
-                      backstrokeArrow === '▲'
-                        ? styles.arrowUp
-                        : styles.arrowDown
-                    }
-                  >
-                    {backstrokeArrow}
-                  </span>
-                </TableCell>
-                <TableCell align='right'>
-                  {row.breaststroke}{' '}
-                  <span
-                    style={
-                      breaststrokeArrow === '▲'
-                        ? styles.arrowUp
-                        : styles.arrowDown
-                    }
-                  >
-                    {breaststrokeArrow}
-                  </span>
-                </TableCell>
-                <TableCell align='right'>
-                  {row.butterfly}{' '}
-                  <span
-                    style={
-                      butterflyArrow === '▲' ? styles.arrowUp : styles.arrowDown
-                    }
-                  >
-                    {butterflyArrow}
-                  </span>
-                </TableCell>
-                <TableCell align='right'>
-                  {row.IM}{' '}
-                  <span
-                    style={imArrow === '▲' ? styles.arrowUp : styles.arrowDown}
-                  >
-                    {imArrow}
-                  </span>
-                </TableCell>
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+                    {row.name}
+                  </TableCell>
+
+                  <TableCell align='center'>
+                    {row.freestyle}{' '}
+                    <span
+                      style={
+                        freestyleArrow === '▲'
+                          ? styles.arrowUp
+                          : freestyleArrow === '▼'
+                            ? styles.arrowDown
+                            : {}
+                      }
+                    >
+                      {freestyleArrow}
+                    </span>
+                  </TableCell>
+
+                  <TableCell align='center'>
+                    {row.backstroke}{' '}
+                    <span
+                      style={
+                        backstrokeArrow === '▲'
+                          ? styles.arrowUp
+                          : backstrokeArrow === '▼'
+                            ? styles.arrowDown
+                            : {}
+                      }
+                    >
+                      {backstrokeArrow}
+                    </span>
+                  </TableCell>
+
+                  <TableCell align='center'>
+                    {row.breaststroke}{' '}
+                    <span
+                      style={
+                        breaststrokeArrow === '▲'
+                          ? styles.arrowUp
+                          : breaststrokeArrow === '▼'
+                            ? styles.arrowDown
+                            : {}
+                      }
+                    >
+                      {breaststrokeArrow}
+                    </span>
+                  </TableCell>
+
+                  <TableCell align='center'>
+                    {row.butterfly}{' '}
+                    <span
+                      style={
+                        butterflyArrow === '▲'
+                          ? styles.arrowUp
+                          : butterflyArrow === '▼'
+                            ? styles.arrowDown
+                            : {}
+                      }
+                    >
+                      {butterflyArrow}
+                    </span>
+                  </TableCell>
+
+                  <TableCell align='center'>
+                    {row.IM}{' '}
+                    <span
+                      style={
+                        imArrow === '▲'
+                          ? styles.arrowUp
+                          : imArrow === '▼'
+                            ? styles.arrowDown
+                            : {}
+                      }
+                    >
+                      {imArrow}
+                    </span>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      )}
     </TableContainer>
   );
 }
